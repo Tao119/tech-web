@@ -1,0 +1,92 @@
+@use "../../foundation" as *;
+
+.p-sushida-stats {
+    &__switcher {
+        align-self: flex-start;
+        margin: 20px 0;
+    }
+
+    &__highscore {
+        height: 50px;
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+
+    }
+
+    &__highscore-text {
+        font-size: $fs-text;
+    }
+
+    &__highscore-number {
+        font-size: $fs-title;
+        font-weight: $fw-bold;
+    }
+
+    &__graph {
+        align-self: flex-start;
+    }
+
+
+    &__history {
+        height: 500px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+        flex-grow: 1;
+        overflow: hidden;
+        align-items: flex-start;
+        justify-content: center;
+
+    }
+
+    &__history-list {
+        height: 100%;
+        width: 100%;
+        overflow: scroll;
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__history-title {
+        font-size: $fs-sub_title;
+    }
+
+    &__history-item {
+        display: flex;
+        flex-direction: row;
+        @include contentBox(80%, 50px);
+        margin: 5px;
+    }
+
+    &__history-score {
+        width: 40%;
+        font-size: $fs-medium;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__history-others {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__history-data {
+        font-size: $fs-text;
+    }
+
+    &__pagination {
+        width: 80%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    &__pagination-page {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}

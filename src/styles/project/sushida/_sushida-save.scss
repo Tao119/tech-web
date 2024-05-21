@@ -1,0 +1,153 @@
+@use "../../foundation" as *;
+
+.p-sushida-save {
+    &__save {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        translate: -50% -50%;
+
+    }
+
+    &__save-close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+
+    &__upload-image {
+        width: 350px;
+        height: 280px;
+        border-radius: 10px;
+        border: 1px solid $black;
+    }
+
+    &__buttons {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    &__upload-button::file-selector-button {
+        color: $white;
+        background: $red;
+        font-size: $fs-text;
+        border: 0;
+        border-radius: 5px;
+        padding: 8px 16px;
+        text-align: center;
+        display: block;
+        width: 150px;
+        height: 40px;
+    }
+
+    &__upload-button {
+        width: 150px;
+        margin-bottom: 20px;
+    }
+
+    &__cropper-close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+
+    &__cropper-title {
+        font-size: $fs-sub_title;
+    }
+
+    &__cropper-example {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 500px;
+    }
+
+    &__cropper-example-image {
+        width: 150px;
+        height: 120px;
+    }
+
+    &__cropper-example-text {
+        font-size: $fs-text;
+        width: 300px
+    }
+
+    &__cropper-container {
+        @include contentBox(800px, 700px);
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+
+        left: 50%;
+        top: 50%;
+        translate: -50% -50%;
+
+        z-index: 3;
+    }
+
+    &__cropper {
+        height: 400px;
+        width: 500px;
+    }
+
+    &__cropper-button {
+        width: 150px;
+        height: 40px;
+        margin-bottom: 20px;
+
+        &.-disabled {
+            color: $blue;
+            background-color: $pale-blue;
+        }
+    }
+
+    &__data-container {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    &__data {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        padding: 0 20px;
+        justify-content: space-around;
+        align-items: flex-start;
+    }
+
+    &__data-data {
+        font-size: $fs-medium;
+        text-align: left;
+    }
+
+    &__submit {
+        color: $black;
+        background: $green;
+        font-size: $fs-text;
+        width: 150px;
+        height: 40px;
+
+        &.-disabled {
+            color: $dark-gray;
+            background-color: $pale-green;
+        }
+    }
+
+
+
+    &__err {
+        text-align: left;
+        width: 250px;
+        font-size: $fs-text;
+        color: $red;
+        height: 30px;
+    }
+}

@@ -1,0 +1,36 @@
+@use "../../foundation" as *;
+
+.p-sushida {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 700px;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        @include contentBox(700px, 700px);
+        padding: 10px;
+        margin: 10px;
+        justify-content: flex-start;
+        align-items: center;
+        position: relative;
+    }
+
+    &__switcher {
+        align-self: flex-start;
+    }
+
+    &__title {
+        width: 100%;
+        text-align: left;
+        font-size: $fs-title;
+        margin: 20px 0;
+        padding: 0 20px;
+    }
+
+
+}

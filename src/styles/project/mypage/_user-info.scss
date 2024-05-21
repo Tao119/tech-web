@@ -1,0 +1,44 @@
+@use "../../foundation" as *;
+
+.p-user-info {
+    @include contentBox(500px, 300px);
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 50px;
+
+    &__title {
+        font-size: $fs-sub_title;
+        margin: 30px 0;
+    }
+
+    &__contents {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    &__icon {
+        width: 200px;
+        height: 200px;
+    }
+
+    &__info {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__label {
+        font-size: $fs-small;
+        margin-bottom: 10px;
+    }
+
+    &__name {
+        font-size: $fs-text;
+        margin-bottom: 10px;
+    }
+
+    &__email {
+        font-size: $fs-text;
+        margin-bottom: 10px;
+    }
+}

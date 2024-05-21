@@ -1,0 +1,25 @@
+@use '../foundation' as *;
+
+.c-button {
+    height: 50px;
+    width: 200px;
+    background-color: $blue;
+    color: $white;
+    border-radius: 4px;
+    box-shadow: none;
+    font-size: $fs-small;
+    text-align: center;
+    cursor: pointer;
+    white-space: pre-wrap;
+
+    &.-inactive {
+        background-color: $light-blue;
+        color: $pale-gray;
+        cursor: default;
+    }
+
+    &__img {
+        width: 100%;
+        height: 100%;
+    }
+}

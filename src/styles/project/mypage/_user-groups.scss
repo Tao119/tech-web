@@ -1,0 +1,135 @@
+@use "../../foundation" as *;
+
+.p-user-groups {
+    @include contentBox(500px, 300px);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    &__title {
+        height: 50px;
+        font-size: $fs-sub_title;
+        padding: 20px 0;
+    }
+
+
+
+    &__join-title {
+        font-size: $fs-text;
+        margin-right: 20px;
+    }
+
+    &__join-input {
+        width: 100px;
+        height: 30px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        flex-direction: row;
+        border-radius: 10px;
+        border: 1px solid $gray;
+        margin-bottom: 20px;
+
+
+    }
+
+    &__join-submit {
+        width: 50px;
+        height: 30px;
+        color: $white;
+        background-color: $blue;
+        border-radius: 10px;
+
+        &.-disabled {
+            color: $blue;
+            background-color: $pale-blue;
+        }
+    }
+
+    &__plus {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+
+    &__join-options {
+        position: absolute;
+        top: 30px;
+        right: 10px;
+        background-color: $white;
+        width: 150px;
+        border-radius: 5px;
+        border: 1px solid $gray;
+        display: flex;
+        flex-direction: column;
+        z-index: 3;
+
+    }
+
+    &__join-option {
+        font-size: $fs-small;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 5px;
+
+        &:hover {
+            background-color: $light-gray;
+        }
+    }
+
+    &__join {
+        position: absolute;
+        @include contentBox(50%, 50%);
+        top: 50%;
+        left: 50%;
+        translate: -50% -50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    &__close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+
+    &__join-title {
+        height: 50px;
+        text-align: left;
+        padding: 20px 10px;
+    }
+
+    &__groups {
+        width: 100%;
+        height: calc(100% - 50px);
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__group {
+        @include contentBox(180px, 100px);
+        margin: 10px;
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+        cursor: pointer;
+
+        &.-active {
+            border: 1px solid $yellow;
+        }
+    }
+
+    &__name {
+        font-size: $fs-text;
+    }
+
+    &__overlay {
+        background-color: transparent;
+    }
+}

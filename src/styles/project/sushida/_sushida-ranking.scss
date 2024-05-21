@@ -1,0 +1,142 @@
+@use "../../foundation" as *;
+
+.p-sushida-ranking {
+
+    &__top {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        height: 300px;
+        align-items: flex-start;
+    }
+
+    &__top-title {
+        font-size: $fs-sub-title;
+        margin-bottom: 10px;
+    }
+
+    &__top-list {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+
+    &__top-item {
+        height: 25%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    &__top-rank {
+        font-size: $fs-medium;
+
+        &.-gold {
+            color: $gold;
+        }
+
+        &.-silver {
+            color: $silver;
+        }
+
+        &.-bronze {
+            color: $bronze;
+        }
+    }
+
+    &__top-data {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__top-score {
+        font-size: $fs-medium;
+        font-weight: $fw-bold;
+    }
+
+    &__top-name {
+        font-size: $fs-text;
+    }
+
+    &__timeline {
+        height: 500px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+        flex-grow: 1;
+        overflow: hidden;
+        align-items: flex-start;
+        justify-content: center;
+    }
+
+    &__timeline-list {
+        height: 100%;
+        width: 100%;
+        overflow: scroll;
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__timeline-title {
+        font-size: $fs-sub-title;
+    }
+
+    &__timeline-item {
+        display: flex;
+        flex-direction: row;
+        @include contentBox(80%, 50px);
+        margin: 5px;
+    }
+
+    &__timeline-score {
+        width: 20%;
+        font-size: $fs-medium;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__timeline-name {
+        width: 20%;
+        font-size: $fs-medium;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__timeline-date {
+        width: 10%;
+        font-size: $fs-medium;
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+        flex-grow: 1;
+        padding: 10px;
+    }
+
+    &__timeline-others {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__timeline-data {
+        font-size: $fs-text;
+    }
+
+    &__pagination {
+        width: 80%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    &__pagination-page {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}

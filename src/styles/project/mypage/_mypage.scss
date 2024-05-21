@@ -1,0 +1,24 @@
+@use "../../foundation" as *;
+
+.p-mypage {
+    width: 500px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+
+    &__title {
+        text-align: left;
+        font-size: $fs-title;
+        margin: 20px 0;
+        padding: 0 20px;
+    }
+
+    &__notification {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+    }
+
+}
