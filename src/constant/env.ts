@@ -13,6 +13,6 @@ export const FIREBASE_APP_ID = process.env["NEXT_PUBLIC_FIREBASE_APP_ID"] ?? "";
 export const FIREBASE_DATABASE_URL = process.env["NEXT_PUBLIC_FIREBASE_DATABASE_URL"] ?? "";
 export const FIREBASE_MEASUREMENT_ID =
     process.env["NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID"] ?? "";
-export const FSA_PROJECT_ID = process.env["FSA_PROJECT_ID"] ?? "";
-export const FFSA_PRIVATE_KEY = process.env["FSA_PRIVATE_KEY"] ?? "";
-export const FSA_CLIENT_EMAIL = process.env["FSA_CLIENT_EMAIL"] ?? "";
+export const FSA_PROJECT_ID = process.env["NEXT_PUBLIC_FSA_PROJECT_ID"] ?? "";
+export const FFSA_PRIVATE_KEY = process.env["NEXT_PUBLIC_FSA_PRIVATE_KEY"] ?? "";
+export const FSA_CLIENT_EMAIL = process.env["NEXT_PUBLIC_FSA_CLIENT_EMAIL"] ?? "";

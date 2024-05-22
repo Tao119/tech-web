@@ -8,7 +8,7 @@ export const authOptions: NextAuthOptions = {
     providers: [
         CredentialsProvider({
             credentials: {},
-            authorize: async ({ idToken }: any, _req) => {
+            authorize: async ({ idToken }: any, _req): Promise<any> => {
                 if (idToken) {
                     try {
                         const decoded = await auth.verifyIdToken(idToken);
@@ -26,7 +26,7 @@ export const authOptions: NextAuthOptions = {
         strategy: "jwt",
     },
     callbacks: {
-        async jwt({ token, user }) {
+        async jwt({ token, user }): Promise<any> {
             return { ...token, ...user };
         },
         async session({ session, token }) {
