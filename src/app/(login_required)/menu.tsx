@@ -29,7 +29,7 @@ const Menu = ({
           closeMenu();
         }}
       >
-        情報(工事中)
+        情報
       </span>
       <span
         className="l-menu__link"

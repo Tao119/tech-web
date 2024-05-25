@@ -4,12 +4,14 @@ import MenuImage from "@/assets/img/menu.png";
 import CloseImage from "@/assets/img/close.png";
 import Menu from "./menu";
 import { useState } from "react";
+import { useParams, usePathname, useRouter } from "next/navigation";
 
 export default function GuestLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const pathName = usePathname();
   const [showMenu, setShowMenu] = useState(false);
 
   return (
@@ -35,6 +37,7 @@ export default function GuestLayout({
           }}
         />
       )}
+      {pathName != "/mypage" ? <></> : null}
       {children}
     </>
   );

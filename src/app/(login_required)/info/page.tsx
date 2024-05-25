@@ -38,18 +38,29 @@ const Page = () => {
     <div className="p-info">
       <span className="p-info__title">情報</span>
       <div className="p-info__links">
-        <Link href="" target="_brank" className="p-info__link">
+        {/* <Link href="" target="_brank" className="p-info__link">
           TMS
-        </Link>
-        <Link href="" target="_brank" className="p-info__link">
-          Messengerグループ(チーム)
-        </Link>
-        <Link href="" target="_brank" className="p-info__link">
-          Messengerグループ(メンター)
-        </Link>
-        <Link href="" target="_brank" className="p-info__link">
-          FaceBookグループ
-        </Link>
+        </Link> */}
+        {groupData?.messenger ? (
+          <Link
+            href={groupData?.messenger}
+            target="_brank"
+            className="p-info__link"
+          >
+            Messengerグループ(チーム)
+          </Link>
+        ) : (
+          <span className="p-info__link -disabled">
+            Messengerグループ(チーム)
+          </span>
+        )}
+        {groupData?.facebook ? (
+          <Link href="" target="_brank" className="p-info__link">
+            FaceBookグループ
+          </Link>
+        ) : (
+          <span className="p-info__link -disabled">FaceBookグループ</span>
+        )}
       </div>
     </div>
   );

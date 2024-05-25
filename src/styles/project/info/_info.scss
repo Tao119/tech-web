@@ -28,6 +28,10 @@
         margin-bottom: 10px;
         color: $blue;
         text-decoration: underline;
+
+        &.-disabled {
+            color: $gray;
+        }
     }
 
 }

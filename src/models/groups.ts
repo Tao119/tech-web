@@ -8,6 +8,8 @@ export interface GroupData {
     members?: string[];
     name: string;
     owner?: string;
+    facebook?: string;
+    messenger?: string;
 };
 
 // Read groups by user ID
