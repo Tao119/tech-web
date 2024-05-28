@@ -126,10 +126,26 @@
     }
 
     &__name {
-        font-size: $fs-text;
+        font-size: $fs-medium;
+        font-weight: $fw-bold;
+        margin-bottom: 5px;
     }
 
     &__overlay {
         background-color: transparent;
+    }
+
+    &__id {
+        font-size: $fs-text;
+        margin-bottom: 5px;
+    }
+
+    &__members {
+        overflow-y: scroll;
+        flex-grow: 1;
+    }
+
+    &__member {
+        font-size: $fs-text;
     }
 }

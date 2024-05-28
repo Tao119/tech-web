@@ -192,6 +192,12 @@ const MyPage = () => {
                 key={group.id}
               >
                 <span className="p-user-groups__name">{group.name}</span>
+                <span className="p-user-groups__id">{group.id}</span>
+                <ul className="p-user-groups__members">
+                  {group.membersName?.map((m) => (
+                    <li className="p-user-groups__member">{m}</li>
+                  ))}
+                </ul>
               </div>
             ))}
           </div>

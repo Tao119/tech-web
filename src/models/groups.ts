@@ -2,10 +2,12 @@ import { db } from "@/firebase/client";
 import { convertToCamelCase, convertToSnakeCase } from "@/services/convert";
 import { setDocWithSnake } from "@/services/firestore";
 import { doc, getDoc, query, collection, getDocs, where } from "firebase/firestore";
+import { readUserById } from "./users";
 
 export interface GroupData {
     id: string;
     members?: string[];
+    membersName?: string[];
     name: string;
     owner?: string;
     facebook?: string;
@@ -22,6 +24,17 @@ export const readGroupsByUserId = async (userId: string): Promise<{ success: boo
             id: doc.id,
             ...convertToCamelCase(doc.data())
         }));
+        groups.forEach((g) => {
+            g.membersName = [];
+
+            g.members?.forEach(async (m) => {
+                const user = await readUserById(m);
+                const name = user.data?.name;
+                if (name) {
+                    g.membersName?.push(name)
+                }
+            })
+        })
         return { success: true, data: groups };
     } catch (error) {
         return { success: false, error: "Failed to read groups by user ID." };
@@ -35,7 +48,18 @@ export const readGroupById = async (id: string): Promise<{ success: boolean, dat
         if (!groupDoc.exists()) {
             return { success: false, error: "Group not found." };
         }
-        return { success: true, data: { id, ...convertToCamelCase(groupDoc.data()) } as GroupData };
+        const data = { id, ...convertToCamelCase(groupDoc.data()) } as GroupData
+        data.membersName = [];
+
+        data.members?.forEach(async (m) => {
+            const user = await readUserById(m);
+            const name = user.data?.name;
+            if (name) {
+                data.membersName?.push(name)
+            }
+        })
+
+        return { success: true, data: data };
     } catch (error) {
         return { success: false, error: "Failed to read group by ID." };
     }

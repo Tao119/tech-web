@@ -61,6 +61,24 @@
         font-size: $fs-text;
     }
 
+    &__top-sub {
+        font-size: $fs-text;
+    }
+
+    &__top-contents {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        height: 100%;
+    }
+
+    &__top-content {
+        width: 50%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
     &__timeline {
         height: 500px;
         width: 100%;

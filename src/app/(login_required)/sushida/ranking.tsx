@@ -19,8 +19,17 @@ const Ranking = () => {
   const [selectedCourse, setCourse] = useState(3000);
   const [data, setData] = useState<RankingData[]>([]);
   const { startLottie, endLottie } = useContext(AnimationContext)!;
+
   const sortedDataByScore = [...data].sort((a, b) =>
     a.score < b.score ? 1 : -1
+  );
+
+  const today = new Date();
+  const oneWeekAgo = new Date();
+  oneWeekAgo.setDate(today.getDate() - 7);
+
+  const sortedDataByScoreInThisWeek = [...sortedDataByScore].filter(
+    (d) => d.date >= oneWeekAgo
   );
   const sortedDataByDate = [...data].sort((a, b) => (a.date < b.date ? 1 : -1));
   const [page, setPage] = useState(1);
@@ -54,34 +63,71 @@ const Ranking = () => {
         <span className="p-sushida-ranking__top-title">
           {selectedCourse}円コース　ランキング({groupData?.name})
         </span>
-        {sortedDataByScore.filter((d) => d.course == selectedCourse).length ==
-        0 ? (
-          <span>データが存在しません</span>
-        ) : (
-          sortedDataByScore
-            .filter((d) => d.course == selectedCourse)
-            .slice(0, 3)
-            .map((d, index) => (
-              <li className="p-sushida-ranking__top-item" key={index}>
-                <div
-                  className={`p-sushida-ranking__top-rank ${
-                    index == 0 ? "-gold" : index == 1 ? "-silver" : "bronze"
-                  }`}
-                >
-                  {index + 1}位
-                </div>
-                <div className="p-sushida-ranking__top-data">
-                  <div className="p-sushida-ranking__top-score u-mr36">
-                    {d.score}
-                  </div>
-                  <div className="p-sushida-ranking__top-name">
-                    {d.userName}
-                  </div>
-                </div>
-                {d.image ? <Image src={d.image} alt="" /> : null}
-              </li>
-            ))
-        )}
+        <div className="p-sushida-ranking__top-contents">
+          <div className="p-sushida-ranking__top-content">
+            <span className="p-sushida-ranking__top-sub">全期間</span>
+            {sortedDataByScore.filter((d) => d.course == selectedCourse)
+              .length == 0 ? (
+              <span>データが存在しません</span>
+            ) : (
+              sortedDataByScore
+                .filter((d) => d.course == selectedCourse)
+                .slice(0, 3)
+                .map((d, index) => (
+                  <li className="p-sushida-ranking__top-item" key={index}>
+                    <div
+                      className={`p-sushida-ranking__top-rank ${
+                        index == 0 ? "-gold" : index == 1 ? "-silver" : "bronze"
+                      }`}
+                    >
+                      {index + 1}位
+                    </div>
+                    <div className="p-sushida-ranking__top-data">
+                      <div className="p-sushida-ranking__top-score u-mr36">
+                        {d.score}
+                      </div>
+                      <div className="p-sushida-ranking__top-name">
+                        {d.userName}
+                      </div>
+                    </div>
+                    {d.image ? <Image src={d.image} alt="" /> : null}
+                  </li>
+                ))
+            )}
+          </div>
+          <div className="p-sushida-ranking__top-content">
+            <span className="p-sushida-ranking__top-sub">今週</span>
+            {sortedDataByScoreInThisWeek.filter(
+              (d) => d.course == selectedCourse
+            ).length == 0 ? (
+              <span>データが存在しません</span>
+            ) : (
+              sortedDataByScoreInThisWeek
+                .filter((d) => d.course == selectedCourse)
+                .slice(0, 3)
+                .map((d, index) => (
+                  <li className="p-sushida-ranking__top-item" key={index}>
+                    <div
+                      className={`p-sushida-ranking__top-rank ${
+                        index == 0 ? "-gold" : index == 1 ? "-silver" : "bronze"
+                      }`}
+                    >
+                      {index + 1}位
+                    </div>
+                    <div className="p-sushida-ranking__top-data">
+                      <div className="p-sushida-ranking__top-score u-mr36">
+                        {d.score}
+                      </div>
+                      <div className="p-sushida-ranking__top-name">
+                        {d.userName}
+                      </div>
+                    </div>
+                    {d.image ? <Image src={d.image} alt="" /> : null}
+                  </li>
+                ))
+            )}
+          </div>
+        </div>
       </div>
       <div className="p-sushida-ranking__timeline">
         <span className="p-sushida-ranking__timeline-title">タイムライン</span>
