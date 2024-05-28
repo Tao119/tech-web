@@ -9,6 +9,7 @@ export interface HistoryData {
     title: string;
     comment: string;
     image: string;
+    like: number
 }
 
 export const readHistoryData = async (groupId: string) => {
@@ -33,7 +34,7 @@ export const uploadHistory = async (image: File, groupId: string, comment?: stri
     try {
         const historyRef = collection(db, "history");
         const imageUrl = await uploadImage(image);
-        const data = { image: imageUrl, groupId, title, comment }
+        const data = { image: imageUrl, like: 0, groupId, title, comment } as HistoryData
         await setDocWithSnake(doc(historyRef), data);
         return { success: true, data };
     } catch (error) {

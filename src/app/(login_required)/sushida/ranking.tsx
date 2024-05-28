@@ -26,7 +26,8 @@ const Ranking = () => {
 
   const today = new Date();
   const oneWeekAgo = new Date();
-  oneWeekAgo.setDate(today.getDate() - 7);
+  oneWeekAgo.setDate(today.getDate() - 6);
+  oneWeekAgo.setHours(0, 0, 0, 0);
 
   const sortedDataByScoreInThisWeek = [...sortedDataByScore].filter(
     (d) => d.date >= oneWeekAgo
@@ -77,7 +78,11 @@ const Ranking = () => {
                   <li className="p-sushida-ranking__top-item" key={index}>
                     <div
                       className={`p-sushida-ranking__top-rank ${
-                        index == 0 ? "-gold" : index == 1 ? "-silver" : "bronze"
+                        index == 0
+                          ? "-gold"
+                          : index == 1
+                          ? "-silver"
+                          : "-bronze"
                       }`}
                     >
                       {index + 1}位
