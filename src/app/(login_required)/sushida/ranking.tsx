@@ -114,7 +114,11 @@ const Ranking = () => {
                   <li className="p-sushida-ranking__top-item" key={index}>
                     <div
                       className={`p-sushida-ranking__top-rank ${
-                        index == 0 ? "-gold" : index == 1 ? "-silver" : "bronze"
+                        index == 0
+                          ? "-gold"
+                          : index == 1
+                          ? "-silver"
+                          : "-bronze"
                       }`}
                     >
                       {index + 1}位
