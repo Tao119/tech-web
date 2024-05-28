@@ -30,10 +30,10 @@ export const readSushidaDataByUserId = async (userId: string): Promise<{ success
         const q = query(sushidaRef, where("user_id", "==", userId));
         const querySnapshot = await getDocsWithCamel(q);
         const data = querySnapshot.docs.map(doc => {
-            const data = doc.data() as SushidaFirestoreData;
+            const d = doc.data() as SushidaFirestoreData;
             return {
-                ...data,
-                date: new Date(data.time.seconds * 1000)
+                ...d,
+                date: new Date(d.time.seconds * 1000)
             } as SushidaData;
         });
         return { success: true, data };

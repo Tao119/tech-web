@@ -52,6 +52,15 @@ const Menu = ({
       <span
         className="l-menu__link"
         onClick={() => {
+          router.push("history");
+          closeMenu();
+        }}
+      >
+        写真集
+      </span>
+      <span
+        className="l-menu__link"
+        onClick={() => {
           router.push("games");
           closeMenu();
         }}
