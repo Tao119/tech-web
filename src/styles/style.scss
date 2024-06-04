@@ -14,6 +14,8 @@
 @use "component/overlay";
 @use "component/switcher";
 @use "component/pagination";
+@use "component/checkbox";
+@use "component/accordion";
 
 
 //project
@@ -24,6 +26,7 @@
 @use "project/sushida";
 @use "project/info";
 @use "project/history";
+@use "project/check-work";
 
 //utility
 @use "utility/align";

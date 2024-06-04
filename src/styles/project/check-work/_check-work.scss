@@ -1,0 +1,99 @@
+@use "../../foundation/" as *;
+
+.p-check-work {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    height: 100%;
+    overflow-y: scroll;
+
+    padding: 20px;
+    padding-bottom: 100%;
+
+    &__title {
+        font-size: $fs-title;
+        margin-bottom: 12px;
+
+        &.-bold {
+            font-weight: $fw-bold;
+        }
+    }
+
+    &__text {
+        font-size: $fs-text;
+        margin-bottom: 4px;
+
+        &.-bold {
+            font-weight: $fw-bold;
+        }
+    }
+
+    &__medium {
+        font-size: $fs-medium;
+        margin-bottom: 6px;
+
+        &.-bold {
+            font-weight: $fw-bold;
+        }
+    }
+
+    &__sub-title {
+        font-size: $fs-sub-title;
+        margin-bottom: 8px;
+
+        &.-bold {
+            font-weight: $fw-bold;
+        }
+    }
+
+    &__link {
+        color: $blue;
+        text-decoration: underline;
+    }
+
+    &__image {
+        width: 500px;
+        height: auto;
+        margin-bottom: 16px;
+        margin-top: 16px;
+    }
+
+    &__video {
+        width: 500px;
+        height: auto;
+        margin-bottom: 16px;
+        margin-top: 16px;
+    }
+
+
+    &__check {
+        font-size: $fs-sub-title;
+        margin-bottom: 8px;
+        font-weight: $fw-bold;
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.p-check-works {
+    width: 500px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+
+    &__title {
+        text-align: left;
+        font-size: $fs-title;
+        margin: 20px 0;
+        padding: 0 20px;
+    }
+
+    &__link {
+        font-size: $fs-sub-title;
+        color: $blue;
+        text-decoration: underline;
+    }
+}

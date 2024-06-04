@@ -14,8 +14,8 @@ export interface HistoryData {
 
 export const readHistoryData = async (groupId: string) => {
     try {
-        const sushidaRef = collection(db, "history");
-        const q = query(sushidaRef, where("group_id", "==", groupId));
+        const historyRef = collection(db, "history");
+        const q = query(historyRef, where("group_id", "==", groupId));
         const querySnapshot = await getDocsWithCamel(q);
 
         const data = querySnapshot.docs.map(doc => {

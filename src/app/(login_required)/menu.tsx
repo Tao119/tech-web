@@ -70,6 +70,15 @@ const Menu = ({
       <span
         className="l-menu__link"
         onClick={() => {
+          router.push("check-work");
+          closeMenu();
+        }}
+      >
+        チェックワーク
+      </span>
+      <span
+        className="l-menu__link"
+        onClick={() => {
           router.push("products");
           closeMenu();
         }}
