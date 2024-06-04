@@ -6,6 +6,7 @@ import { useSession } from "next-auth/react";
 import { convertToCamelCase } from "@/services/convert";
 import LoadingAnimation from "@/assets/json/loading-animation.json";
 import { UserData, readUserById } from "@/models/users";
+import { readGroupsByUserId } from "@/models/groups";
 
 export default function GuestTemplate({
   children,
@@ -31,7 +32,14 @@ export default function GuestTemplate({
       setUserData(res.data);
 
       const groupId = localStorage.getItem("selected_group_id");
-      if (groupId) setGroup(groupId);
+      if (groupId) {
+        setGroup(groupId);
+      } else {
+        const groups = await readGroupsByUserId(session.user.uid);
+        if (groups.success && groups.data && groups.data?.length > 0) {
+          setGroup(groups.data[0].id);
+        }
+      }
 
       endLottie();
     };
