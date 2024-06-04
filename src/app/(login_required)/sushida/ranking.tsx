@@ -38,6 +38,7 @@ const Ranking = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      if (!selectedGroup) return;
       startLottie(LoadingAnimation);
       const res = await readSushidaDataByGroupId(selectedGroup);
       const res2 = await readGroupById(selectedGroup);
