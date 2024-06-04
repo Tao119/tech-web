@@ -43,8 +43,14 @@ const Page = () => {
       <div className="p-check-work__video"></div>
       <span className="p-check-work__medium">・unityで作る脱出ゲーム</span>
       <span className="p-check-work__medium">・障害物を押して退ける</span>
-      <span className="p-check-work__medium">
+      <span className="p-check-work__medium u-mb36">
         ・クリアすると次のステージに行く
+      </span>
+
+      <span className="p-check-work__sub-title -bold ">目標</span>
+      <span className="p-check-work__medium">・unityの仕様を知る</span>
+      <span className="p-check-work__medium u-mb36">
+        ・スクリプトを自力で描けるようになる
       </span>
 
       <span className="p-check-work__sub-title -bold ">ルール</span>

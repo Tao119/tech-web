@@ -51,11 +51,17 @@ const Page = () => {
         ・タイムオーバーで画面遷移
       </span>
 
+      <span className="p-check-work__sub-title -bold ">目標</span>
+      <span className="p-check-work__medium">・Ray Casterを使いこなす</span>
+      <span className="p-check-work__medium u-mb36">
+        ・自分でゲームを作れるようになる
+      </span>
+
       <span className="p-check-work__sub-title -bold ">ルール</span>
       <span className="p-check-work__medium">・過去の教科書やweb検索 OK</span>
       <span className="p-check-work__medium">・webのコードのコピペ NG</span>
       <span className="p-check-work__medium">
-        ・chatGPTなどの生成AIへの質問 NG
+        ・chatGPTなどの生成AIへの質問 OK(全てコピペはNG)
       </span>
       <span className="p-check-work__medium u-mb36">
         ・メンターへの質問 歓迎
