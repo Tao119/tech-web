@@ -1,6 +1,6 @@
 import { db } from "@/firebase/client";
-import { convertToCamelCase, convertToSnakeCase } from "@/services/convert";
-import { setDocWithSnake } from "@/services/firestore";
+import { convertToCamelCase } from "@/services/convert";
+import { getDocsWithCamel, setDocWithSnake } from "@/services/firestore";
 import { doc, getDoc, query, collection, getDocs, where } from "firebase/firestore";
 import { readUserById } from "./users";
 
@@ -19,7 +19,7 @@ export const readGroupsByUserId = async (userId: string): Promise<{ success: boo
     try {
         const groupsRef = collection(db, "groups");
         const q = query(groupsRef, where("members", "array-contains", userId));
-        const querySnapshot = await getDocs(q);
+        const querySnapshot = await getDocsWithCamel(q);
         const groups: GroupData[] = querySnapshot.docs.map(doc => ({
             id: doc.id,
             ...convertToCamelCase(doc.data())
@@ -61,6 +61,7 @@ export const readGroupById = async (id: string): Promise<{ success: boolean, dat
 
         return { success: true, data: data };
     } catch (error) {
+        console.log(error)
         return { success: false, error: "Failed to read group by ID." };
     }
 }

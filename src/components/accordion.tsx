@@ -6,12 +6,14 @@ type Props = {
   children: ReactNode;
   isSelected: boolean;
   setSelection: Function;
+  checkbox?: boolean;
 };
 
-export const Accordion: React.VFC<Props> = (props) => {
+export const Accordion = (props: Props) => {
   const accordionClick = (e: React.MouseEvent<HTMLElement>) => {
     const _this: HTMLElement = e.currentTarget;
-    const thisContent = _this.closest<HTMLElement>(".c-accordion__content");
+    const thisParent = _this.closest<HTMLElement>(".c-accordion");
+    const thisContent = thisParent?.querySelector(".c-accordion__content");
 
     if (thisContent) {
       if (thisContent.classList.contains("-active")) {
@@ -25,12 +27,14 @@ export const Accordion: React.VFC<Props> = (props) => {
     <>
       <div className="c-accordion">
         <div className="c-accordion__header">
-          <input
-            type="checkbox"
-            className="c-accordion__check"
-            onChange={() => props.setSelection()}
-            checked={props.isSelected}
-          />
+          {props.checkbox ? (
+            <input
+              type="checkbox"
+              className="c-accordion__check"
+              onChange={() => props.setSelection()}
+              checked={props.isSelected}
+            />
+          ) : null}
           <span onClick={accordionClick} className="c-accordion__title">
             {props.title}
           </span>

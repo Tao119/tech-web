@@ -1,5 +1,7 @@
 import { db } from "@/firebase/client";
-import { convertToCamelCase, convertToSnakeCase } from "@/services/convert";
+import {
+    convertToCamelCase
+} from "@/services/convert";
 import { setDocWithSnake } from "@/services/firestore";
 import { doc, getDoc, } from "firebase/firestore";
 

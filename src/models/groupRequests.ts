@@ -1,12 +1,12 @@
 import { db } from "@/firebase/client";
-import { convertToCamelCase, convertToSnakeCase } from "@/services/convert";
 import { getDocWithCamel, getDocsWithCamel, setDocWithSnake, updateDocWithSnake } from "@/services/firestore";
 import { doc, query, collection, where, arrayUnion } from "firebase/firestore";
 import { GroupData } from "./groups";
 
 export enum RequestStatus {
     pending,
-    approved
+    approved,
+    dismissed
 }
 
 export interface GroupRequestData {
@@ -85,7 +85,7 @@ export const createRequest = async (userId: string, groupId: string): Promise<{ 
     }
 };
 
-export const approveRequest = async (requestId: string): Promise<{ success: boolean, error?: string }> => {
+export const approveRequest = async (requestId: string, approve: boolean): Promise<{ success: boolean, error?: string, data?: GroupRequestData }> => {
     try {
         const requestRef = doc(db, "group_requests", requestId);
         const docSnapshot = await getDocWithCamel(requestRef);
@@ -93,15 +93,22 @@ export const approveRequest = async (requestId: string): Promise<{ success: bool
         if (!requestData) {
             return { success: false, error: "Request does not exist." };
         }
+        if (approve) {
 
-        await updateDocWithSnake(requestRef, {
-            status: "approved",
-        });
-        const groupRef = doc(db, "groups", requestData.groupId);
-        await updateDocWithSnake(groupRef, {
-            members: arrayUnion(requestData.userId),
-        });
-        return { success: true };
+            await updateDocWithSnake(requestRef, {
+                status: RequestStatus.approved,
+            });
+            const groupRef = doc(db, "groups", requestData.groupId);
+            await updateDocWithSnake(groupRef, {
+                members: arrayUnion(requestData.userId),
+            });
+            return { success: true, data: { ...requestData, status: RequestStatus.approved } };
+        } else {
+            await updateDocWithSnake(requestRef, {
+                status: RequestStatus.dismissed,
+            });
+            return { success: true, data: { ...requestData, status: RequestStatus.dismissed } };
+        }
     } catch (error) {
         return { success: false, error: "Failed to approve request." };
     }

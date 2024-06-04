@@ -1,3 +1,5 @@
+import { FieldValue } from "firebase/firestore";
+
 export function convertToSnakeCase(obj: any): any {
   if (obj === null || typeof obj !== "object") {
     return obj;
@@ -14,6 +16,27 @@ export function convertToSnakeCase(obj: any): any {
       (match) => `_${match.toLowerCase()}`
     );
     snakeObj[snakeKey] = convertToSnakeCase(value);
+  }
+
+  return snakeObj;
+}
+
+export function convertToSnakeCaseWithoutFieldValue(obj: any): any {
+  if (obj === null || typeof obj !== "object" || obj instanceof FieldValue) {
+    return obj;
+  }
+
+  if (Array.isArray(obj)) {
+    return obj.map(convertToSnakeCaseWithoutFieldValue);
+  }
+
+  const snakeObj: any = {};
+  for (const [key, value] of Object.entries(obj)) {
+    const snakeKey = key.replace(
+      /[A-Z]/g,
+      (match) => `_${match.toLowerCase()}`
+    );
+    snakeObj[snakeKey] = convertToSnakeCaseWithoutFieldValue(value);
   }
 
   return snakeObj;

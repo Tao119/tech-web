@@ -1,15 +1,15 @@
 import { DocumentData, DocumentReference, DocumentSnapshot, Query, QuerySnapshot, SetOptions, WithFieldValue, getDoc, getDocs, setDoc, updateDoc } from "firebase/firestore";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { convertToCamelCase, convertToSnakeCase } from "./convert";
+import { convertToCamelCase, convertToSnakeCase, convertToSnakeCaseWithoutFieldValue } from "./convert";
 
 export const setDocWithSnake = async <T>(reference: DocumentReference<T>, data: WithFieldValue<T>, options?: SetOptions): Promise<void> => {
-    const transformedData = convertToSnakeCase(data);
+    const transformedData = convertToSnakeCaseWithoutFieldValue(data);
 
     return setDoc(reference, transformedData, options || {});
 };
 
 export const updateDocWithSnake = async <T>(reference: DocumentReference<T>, data: WithFieldValue<T>, options?: SetOptions): Promise<void> => {
-    const transformedData = convertToSnakeCase(data);
+    const transformedData = convertToSnakeCaseWithoutFieldValue(data);
 
     return updateDoc(reference, transformedData, options || {});
 };
@@ -25,6 +25,7 @@ export async function getDocWithCamel<AppModelType, DbModelType>(
     const data = convertToCamelCase(docSnapshot.data() as DbModelType) as AppModelType;
     return {
         ...docSnapshot,
+        id: docSnapshot.id,
         data: () => data,
         exists: docSnapshot.exists.bind(docSnapshot)
     } as Object as DocumentSnapshot<AppModelType>;
@@ -38,6 +39,7 @@ export async function getDocsWithCamel<AppModelType, DbModelType>(
         const data = convertToCamelCase(docSnapshot.data() as DbModelType) as AppModelType;
         return {
             ...docSnapshot,
+            id: docSnapshot.id,
             data: () => data,
             exists: docSnapshot.exists.bind(docSnapshot)
         } as Object as DocumentSnapshot<AppModelType>;

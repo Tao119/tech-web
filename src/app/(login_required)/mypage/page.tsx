@@ -13,12 +13,26 @@ import { PlusButton } from "@/components/plusButton";
 import { NotificationButton } from "@/components/notificationButton";
 import { OverLay } from "@/components/overlay";
 import LoadingAnimation from "@/assets/json/loading-animation.json";
-import { GroupData, createGroup, readGroupsByUserId } from "@/models/groups";
+import {
+  GroupData,
+  createGroup,
+  readGroupById,
+  readGroupsByUserId,
+} from "@/models/groups";
 import {
   GroupRequestData,
   createRequest,
   readRequestsByOwnerId,
 } from "@/models/groupRequests";
+import { Notification } from "./notification";
+import {
+  NotificationData,
+  NotificationType,
+  readNotificationDataByUserId,
+  uploadNotification,
+} from "@/models/notification";
+import { createReqestsString } from "@/constant/strings";
+import { Timestamp } from "firebase/firestore";
 
 enum GroupOptions {
   null,
@@ -31,9 +45,12 @@ const MyPage = () => {
   const [requests, setRequests] = useState<GroupRequestData[]>([]);
   const [groupIdOrName, setGroupIdOrName] = useState("");
   const [showPopup, setShowPopup] = useState(GroupOptions.null);
+  const [showNotification, setShowNotification] = useState(false);
   const [showJoinOptions, setShowJoinOptions] = useState(false);
   const { startLottie, endLottie } = useContext(AnimationContext)!;
   const { selectedGroup, setGroup } = useContext(GroupContext)!;
+  const [notifications, setNotifications] = useState<NotificationData[]>([]);
+  const unread = notifications.some((d) => !d.read);
   const router = useRouter();
 
   useEffect(() => {
@@ -46,7 +63,15 @@ const MyPage = () => {
         endLottie();
         return;
       }
+
       setGroups(res.data);
+      const res2 = await readNotificationDataByUserId(userData.id);
+      if (!res2 || !res2.data) {
+        console.error(res2.error);
+        endLottie();
+        return;
+      }
+      setNotifications(res2.data);
       endLottie();
     };
     fetchData();
@@ -78,6 +103,27 @@ const MyPage = () => {
       endLottie();
       return;
     }
+    const res2 = await readGroupById(groupIdOrName);
+    if (!res2.success || !res2.data) {
+      console.error(res2.error);
+      endLottie();
+      return;
+    }
+
+    const res3 = await uploadNotification({
+      requestId: res.data.id,
+      time: Timestamp.fromDate(new Date()),
+      userId: res2.data.owner!,
+      type: NotificationType.request,
+      date: new Date(),
+      read: false,
+      ...createReqestsString(userData.name, res2.data.name),
+    });
+    if (!res3.success) {
+      console.error(res3.error);
+      endLottie();
+      return;
+    }
     setShowPopup(GroupOptions.null);
     setGroupIdOrName("");
     endLottie();
@@ -102,7 +148,19 @@ const MyPage = () => {
     <>
       <div className="p-mypage">
         <span className="p-mypage__title">マイページ</span>
-        <NotificationButton className="p-mypage__notification" />
+        <NotificationButton
+          unread={unread}
+          className="p-mypage__notification"
+          onClick={() => setShowNotification(true)}
+        />
+        {showNotification ? (
+          <Notification
+            notifications={notifications}
+            close={() => {
+              setShowNotification(false);
+            }}
+          />
+        ) : null}
         <div className="p-user-info">
           <span className="p-user-info__title">ユーザー情報</span>
           <div className="p-user-info__contents">
@@ -194,8 +252,10 @@ const MyPage = () => {
                 <span className="p-user-groups__name">{group.name}</span>
                 <span className="p-user-groups__id">{group.id}</span>
                 <ul className="p-user-groups__members">
-                  {group.membersName?.map((m) => (
-                    <li className="p-user-groups__member">{m}</li>
+                  {group.membersName?.map((m, i) => (
+                    <li key={i} className="p-user-groups__member">
+                      {m}
+                    </li>
                   ))}
                 </ul>
               </div>
@@ -206,7 +266,17 @@ const MyPage = () => {
       {showJoinOptions ? (
         <OverLay
           className="p-user-groups__overlay"
-          onClick={() => setShowJoinOptions(false)}
+          onClick={() => {
+            setShowJoinOptions(false);
+          }}
+        />
+      ) : null}
+      {showNotification ? (
+        <OverLay
+          className="p-notification__overlay"
+          onClick={() => {
+            setShowNotification(false);
+          }}
         />
       ) : null}
     </>

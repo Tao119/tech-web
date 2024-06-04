@@ -56,6 +56,7 @@ const Page = () => {
       </span>
 
       <Accordion
+        checkbox
         title="STEP1 プロジェクトの作成"
         open={true}
         setSelection={() => setSelection(0)}
@@ -79,6 +80,7 @@ const Page = () => {
       </Accordion>
 
       <Accordion
+        checkbox
         title="STEP2 プレイヤーの作成"
         setSelection={() => setSelection(1)}
         isSelected={isSelected[1]}
@@ -104,6 +106,7 @@ const Page = () => {
         </span>
       </Accordion>
       <Accordion
+        checkbox
         title="STEP3 ステージの作成"
         setSelection={() => setSelection(2)}
         isSelected={isSelected[2]}
@@ -132,6 +135,7 @@ const Page = () => {
         </span>
       </Accordion>
       <Accordion
+        checkbox
         title="STEP4 ゴールの作成"
         setSelection={() => setSelection(3)}
         isSelected={isSelected[3]}
@@ -174,6 +178,7 @@ const Page = () => {
         </span> */}
       </Accordion>
       <Accordion
+        checkbox
         title="STEP5 複数ステージの作成"
         setSelection={() => setSelection(4)}
         isSelected={isSelected[4]}
@@ -228,6 +233,7 @@ const Page = () => {
         </span>
       </Accordion>
       <Accordion
+        checkbox
         title="STEP6 完成!!"
         setSelection={() => setSelection(5)}
         isSelected={isSelected[5]}
