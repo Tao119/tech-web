@@ -54,10 +54,10 @@ const Page = () => {
       </span>
 
       <span className="p-check-work__sub-title -bold ">ルール</span>
-      <span className="p-check-work__medium">・過去の教科書やweb検索 OK</span>
-      <span className="p-check-work__medium">・webのコードのコピペ NG</span>
+      <span className="p-check-work__medium">・過去の教科書の参照 OK</span>
+      <span className="p-check-work__medium">・web検索 OK</span>
       <span className="p-check-work__medium">
-        ・chatGPTなどの生成AIへの質問 NG
+        ・chatGPTなどの生成AIへの質問 NG (アレンジのみOK)
       </span>
       <span className="p-check-work__medium u-mb36">
         ・メンターへの質問 歓迎
@@ -244,6 +244,14 @@ const Page = () => {
         </span>
         <span className="p-check-work__medium">
           2. もし時間があったらアレンジを加えてみよう
+        </span>
+        <span className="p-check-work__text u-bl">
+          Hint. アレンジ案1:
+          全体を暗くしてプレイヤーの周りだけ明るくなるようにする(探検してるような)
+        </span>
+        <span className="p-check-work__text u-bl">
+          Hint. アレンジ案2:
+          立体的なステージを作る(1マスのみジャンプできるようにする)
         </span>
       </Accordion>
     </div>
