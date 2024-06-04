@@ -14,7 +14,6 @@ import Image7 from "@/assets/img/shooting-game7.png";
 import Image8 from "@/assets/img/shooting-game8.png";
 import Link from "next/link";
 import { useState } from "react";
-import { Checkbox } from "primereact/checkbox";
 import Accordion from "@/components/accordion";
 
 const Page = () => {
@@ -69,6 +68,7 @@ const Page = () => {
 
       <Accordion
         title="STEP1 プロジェクトの起動"
+        open={true}
         setSelection={() => setSelection(0)}
         isSelected={isSelected[0]}
       >

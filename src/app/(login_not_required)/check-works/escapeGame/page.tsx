@@ -2,19 +2,11 @@
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { YouTubeEmbed } from "@next/third-parties/google";
 import Image0 from "@/assets/img/escape-game0.png";
 import Image1 from "@/assets/img/escape-game1.png";
 import Image2 from "@/assets/img/escape-game2.png";
-import Image3 from "@/assets/img/escape-game3.png";
-import Image4 from "@/assets/img/escape-game4.png";
-import Image5 from "@/assets/img/escape-game5.png";
-import Image6 from "@/assets/img/escape-game6.png";
-import Image7 from "@/assets/img/escape-game7.png";
-import Image8 from "@/assets/img/escape-game8.png";
 import Link from "next/link";
 import { useState } from "react";
-import { Checkbox } from "primereact/checkbox";
 import Accordion from "@/components/accordion";
 
 const Page = () => {
@@ -65,6 +57,7 @@ const Page = () => {
 
       <Accordion
         title="STEP1 プロジェクトの作成"
+        open={true}
         setSelection={() => setSelection(0)}
         isSelected={isSelected[0]}
       >

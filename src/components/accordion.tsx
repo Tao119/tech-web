@@ -11,22 +11,19 @@ type Props = {
 export const Accordion: React.VFC<Props> = (props) => {
   const accordionClick = (e: React.MouseEvent<HTMLElement>) => {
     const _this: HTMLElement = e.currentTarget;
-    const thisParent = _this.closest<HTMLElement>(".c-accordion");
-    const thisContent = thisParent?.querySelector(".c-accordion__content");
+    const thisContent = _this.closest<HTMLElement>(".c-accordion__content");
 
-    if (thisContent && thisParent) {
-      if (thisParent.classList.contains("-active")) {
-        thisParent.classList.remove("-active");
+    if (thisContent) {
+      if (thisContent.classList.contains("-active")) {
         thisContent.classList.remove("-active");
       } else {
-        thisParent.classList.add("-active");
         thisContent.classList.add("-active");
       }
     }
   };
   return (
     <>
-      <div className={props.open ? "c-accordion -active" : "c-accordion"}>
+      <div className="c-accordion">
         <div className="c-accordion__header">
           <input
             type="checkbox"
@@ -38,7 +35,13 @@ export const Accordion: React.VFC<Props> = (props) => {
             {props.title}
           </span>
         </div>
-        <div className="c-accordion__content">{props.children}</div>
+        <div
+          className={
+            props.open ? "c-accordion__content -active" : "c-accordion__content"
+          }
+        >
+          {props.children}
+        </div>
       </div>
     </>
   );
