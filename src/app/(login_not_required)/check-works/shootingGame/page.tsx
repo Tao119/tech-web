@@ -199,8 +199,8 @@ const Page = () => {
       </Accordion>
       <Accordion
         title="STEP6 敵やアイテムを自動生成しよう"
-        setSelection={() => setSelection(3)}
-        isSelected={isSelected[3]}
+        setSelection={() => setSelection(5)}
+        isSelected={isSelected[5]}
       >
         <Image className="p-check-work__image" alt="" src={Image7} />
         <span className="p-check-work__medium -bold">
@@ -240,8 +240,8 @@ const Page = () => {
       </Accordion>
       <Accordion
         title="STEP7 リザルト画面"
-        setSelection={() => setSelection(3)}
-        isSelected={isSelected[3]}
+        setSelection={() => setSelection(6)}
+        isSelected={isSelected[6]}
       >
         <Image className="p-check-work__image" alt="" src={Image4} />
         <span className="p-check-work__medium">
@@ -256,8 +256,8 @@ const Page = () => {
       </Accordion>
       <Accordion
         title="STEP8 完成!!"
-        setSelection={() => setSelection(3)}
-        isSelected={isSelected[3]}
+        setSelection={() => setSelection(7)}
+        isSelected={isSelected[7]}
       >
         <span className="p-check-work__medium">
           1. 実際に遊んでみよう！正常に遊べたら完成だよ！

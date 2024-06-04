@@ -87,8 +87,8 @@ const Page = () => {
 
       <Accordion
         title="STEP2 プレイヤーの作成"
-        setSelection={() => setSelection(0)}
-        isSelected={isSelected[0]}
+        setSelection={() => setSelection(1)}
+        isSelected={isSelected[1]}
       >
         <span className="p-check-work__medium">
           1. Playerという名前の球体(Sphere)を作成しよう
@@ -112,8 +112,8 @@ const Page = () => {
       </Accordion>
       <Accordion
         title="STEP3 ステージの作成"
-        setSelection={() => setSelection(3)}
-        isSelected={isSelected[3]}
+        setSelection={() => setSelection(2)}
+        isSelected={isSelected[2]}
       >
         <span className="p-check-work__medium">
           1. 障害物となるCubeをひとつ配置して名前を"Barrier"にしよう
@@ -182,8 +182,8 @@ const Page = () => {
       </Accordion>
       <Accordion
         title="STEP5 複数ステージの作成"
-        setSelection={() => setSelection(3)}
-        isSelected={isSelected[3]}
+        setSelection={() => setSelection(4)}
+        isSelected={isSelected[4]}
       >
         <span className="p-check-work__medium">
           1. ステージをひとつの親オブジェクト"Stage"にまとめよう
@@ -236,8 +236,8 @@ const Page = () => {
       </Accordion>
       <Accordion
         title="STEP6 完成!!"
-        setSelection={() => setSelection(3)}
-        isSelected={isSelected[3]}
+        setSelection={() => setSelection(5)}
+        isSelected={isSelected[5]}
       >
         <span className="p-check-work__medium">
           1. 実際に遊んでみよう！正常に遊べたら完成だよ！
