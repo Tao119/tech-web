@@ -34,6 +34,7 @@
     &__image-title {
         width: 100%;
         font-size: $fs-medium;
+        font-weight: $fw-bold;
         text-align: left;
         margin-bottom: 5px;
     }
@@ -45,7 +46,7 @@
 
     &__image-comment {
         width: 100%;
-        font-size: $fs-medium;
+        font-size: $fs-text;
         text-align: left;
         margin-bottom: 5px;
     }
@@ -58,7 +59,7 @@
 
     &__image-user {
         width: 100%;
-        font-size: $fs-medium;
+        font-size: $fs-text;
         text-align: right;
         margin-bottom: 5px;
     }
