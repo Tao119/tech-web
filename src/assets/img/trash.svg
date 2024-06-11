@@ -1,0 +1,15 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="24px/Trash">
+<path id="Rectangle 43" d="M5.75 4.25H18.25V21C18.25 21.6904 17.6904 22.25 17 22.25H7C6.30964 22.25 5.75 21.6904 5.75 21V4.25Z" stroke="#636363" stroke-width="1.5"/>
+<g id="Rectangle 44">
+<mask id="path-2-inside-1_154_859" fill="white">
+<rect x="9" y="1" width="6" height="4" rx="1"/>
+</mask>
+<rect x="9" y="1" width="6" height="4" rx="1" stroke="#636363" stroke-width="3" mask="url(#path-2-inside-1_154_859)"/>
+</g>
+<rect id="Rectangle 45" x="4" y="3.5" width="16" height="1.5" rx="0.75" fill="#636363"/>
+<path id="Vector 17" d="M12 18L12 8" stroke="#636363" stroke-linecap="round"/>
+<path id="Vector 18" d="M15 18L15 8" stroke="#636363" stroke-linecap="round"/>
+<path id="Vector 19" d="M9 18L9 8" stroke="#636363" stroke-linecap="round"/>
+</g>
+</svg>

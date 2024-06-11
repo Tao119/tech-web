@@ -32,14 +32,34 @@
     }
 
     &__image-title {
+        width: 100%;
         font-size: $fs-medium;
         text-align: left;
         margin-bottom: 5px;
     }
 
+    &__image-delete {
+        align-self: flex-end;
+        margin: 5px;
+    }
+
     &__image-comment {
+        width: 100%;
         font-size: $fs-medium;
         text-align: left;
+        margin-bottom: 5px;
+    }
+
+    &__image {
+        width: 400px;
+        height: 300px;
+        margin-bottom: 5px;
+    }
+
+    &__image-user {
+        width: 100%;
+        font-size: $fs-medium;
+        text-align: right;
         margin-bottom: 5px;
     }
 

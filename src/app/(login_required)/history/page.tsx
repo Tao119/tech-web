@@ -7,7 +7,12 @@ import {
 } from "@/app/contextProvider";
 import LoadingAnimation from "@/assets/json/loading-animation.json";
 import { useRouter } from "next/navigation";
-import { HistoryData, readHistoryData, uploadHistory } from "@/models/history";
+import {
+  HistoryData,
+  deleteHistory,
+  readHistoryData,
+  uploadHistory,
+} from "@/models/history";
 import Image from "next/image";
 import { GroupData, readGroupById } from "@/models/groups";
 import { PlusButton } from "@/components/plusButton";
@@ -15,6 +20,7 @@ import { OverLay } from "@/components/overlay";
 import { Button } from "@/components/button";
 import SampleImage from "@/assets/img/sample-image.jpeg";
 import { CloseButton } from "@/components/closeButton";
+import { DeleteButton } from "@/components/deleteButton";
 
 const Page = () => {
   const [err, setErr] = useState("");
@@ -30,7 +36,7 @@ const Page = () => {
   const { selectedGroup, setGroup } = useContext(GroupContext)!;
 
   const historySortedByDate = [...historyData].sort((a, b) =>
-    a.date > b.date ? 1 : -1
+    a.date > b.date ? -1 : 1
   );
 
   const router = useRouter();
@@ -69,12 +75,28 @@ const Page = () => {
     endLottie();
   };
 
+  const deleteImage = async (id: string | undefined) => {
+    if (!id) return;
+    if (!confirm("本当に削除しますか？")) return;
+    startLottie(LoadingAnimation);
+    const res = await deleteHistory(id);
+
+    if (res.success) {
+      const newData = historyData.filter((d) => d.id !== id);
+      setHistoryData(newData);
+    } else {
+      alert("失敗しました");
+    }
+    endLottie();
+  };
+
   const sendImage = async () => {
-    if (!uploadedImage) return;
+    if (!uploadedImage || !userData) return;
     startLottie(LoadingAnimation);
     const res = await uploadHistory(
       uploadedImage,
       selectedGroup,
+      userData.id,
       comment,
       title
     );
@@ -103,6 +125,14 @@ const Page = () => {
       <div className="p-history__images">
         {historySortedByDate.map((d) => (
           <div className="p-history__image-container">
+            {d.userId == userData?.id ? (
+              <DeleteButton
+                className="p-history__image-delete"
+                onClick={() => {
+                  deleteImage(d.id);
+                }}
+              />
+            ) : null}
             <span className="p-history__image-title">{d.title}</span>
             <span className="p-history__image-comment">{d.comment}</span>
             <Image
@@ -113,6 +143,9 @@ const Page = () => {
               objectFit="cover"
               alt=""
             />
+            <span className="p-history__image-user">
+              {d.userName ? `by ${d.userName}` : ""}
+            </span>
           </div>
         ))}
       </div>
