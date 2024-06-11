@@ -96,8 +96,8 @@ const Stats = (props: { data: SushidaData[] }) => {
         <ul className="p-sushida-stats__history-list">
           {sortedDataByDate
             .slice((page - 1) * total, page * total)
-            .map((data) => (
-              <li className="p-sushida-stats__history-item">
+            .map((data, i) => (
+              <li className="p-sushida-stats__history-item" key={i}>
                 <div className="p-sushida-stats__history-score">
                   {data.score}
                 </div>
