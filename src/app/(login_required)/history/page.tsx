@@ -106,7 +106,10 @@ const Page = () => {
     );
 
     if (res.success && res.data) {
-      setHistoryData((prev) => [...prev!, res.data!]);
+      setHistoryData((prev) => [
+        ...prev!,
+        { userName: userData.name, ...res.data! },
+      ]);
       setShowUploadPopup(false);
       uploadImage(undefined);
       setImageStr("");
