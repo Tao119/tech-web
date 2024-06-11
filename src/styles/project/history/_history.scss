@@ -8,6 +8,11 @@
     position: relative;
 
 
+    &__plus {
+        align-self: flex-end;
+    }
+
+
     &__title {
         text-align: left;
         font-size: $fs-title;
@@ -50,4 +55,64 @@
     }
 
 
+    &__upload {
+        @include contentBox(800px, 700px);
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+
+        left: 50%;
+        top: 50%;
+        translate: -50% -50%;
+
+        z-index: 3;
+    }
+
+    &__upload-title {
+        font-size: $fs-sub-title;
+        font-weight: $fw-bold;
+    }
+
+    &__upload-button {
+        width: 150px;
+        margin-bottom: 20px;
+    }
+
+    &__upload-input {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        flex-direction: row;
+        border-radius: 10px;
+        border: 1px solid $gray;
+        width: 250px;
+        height: 50px;
+        font-size: $fs-medium;
+    }
+
+    &__upload-image {
+        width: 350px;
+        height: 280px;
+        border-radius: 10px;
+        border: 1px solid $black;
+    }
+
+    &__upload-submit {
+        width: 150px;
+        height: 40px;
+        margin-bottom: 20px;
+
+        &.-disabled {
+            color: $blue;
+            background-color: $pale-blue;
+        }
+    }
+
+    &__upload-close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
 }

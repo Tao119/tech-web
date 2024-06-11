@@ -3,12 +3,18 @@ import { doc, query, collection, where, Timestamp } from "firebase/firestore";
 import { UserData } from "./users";
 import { getDocWithCamel, getDocsWithCamel, setDocWithSnake, uploadImage } from "@/services/firestore";
 import { GroupData } from "./groups";
+import { convertToCamelCase } from "@/services/convert";
 
 export interface HistoryData {
     title: string;
     comment: string;
     image: string;
-    like: number
+    like: number;
+    date: Date;
+}
+
+interface HistoryFirestoreData extends HistoryData {
+    time: Timestamp;
 }
 
 export const readHistoryData = async (groupId: string) => {
@@ -18,8 +24,11 @@ export const readHistoryData = async (groupId: string) => {
         const querySnapshot = await getDocsWithCamel(q);
 
         const data = querySnapshot.docs.map(doc => {
-            const d = doc.data();
-            return d as HistoryData;
+            const d = convertToCamelCase(doc.data())
+            return {
+                ...d,
+                date: new Date(d.time.seconds * 1000)
+            } as HistoryData;
         });
         return { success: true, data };
     } catch (error) {
@@ -33,9 +42,11 @@ export const uploadHistory = async (image: File, groupId: string, comment?: stri
     try {
         const historyRef = collection(db, "history");
         const imageUrl = await uploadImage(image);
-        const data = { image: imageUrl, like: 0, groupId, title, comment } as HistoryData
+        const date = new Date();
+        const time = Timestamp.fromDate(date)
+        const data = { image: imageUrl, like: 0, groupId, title, comment, date, time } as HistoryFirestoreData
         await setDocWithSnake(doc(historyRef), data);
-        return { success: true, data };
+        return { success: true, data: data as HistoryData };
     } catch (error) {
         return { success: false, error: "Failed to upload history" };
     }
