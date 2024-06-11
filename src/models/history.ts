@@ -58,6 +58,7 @@ export const uploadHistory = async (image: File, groupId: string, userId: string
         const time = Timestamp.fromDate(date)
         const data = { image: imageUrl, like: 0, groupId, title, comment, date, time, userId } as HistoryFirestoreData
         await setDocWithSnake(doc(historyRef), data);
+        data.id = historyRef.id;
         return { success: true, data: data as HistoryData };
     } catch (error) {
         return { success: false, error: "Failed to upload history" };
