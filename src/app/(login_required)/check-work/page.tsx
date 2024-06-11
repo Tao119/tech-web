@@ -33,7 +33,7 @@ const Page = () => {
       endLottie();
     };
     fetchData();
-  }, [userData]);
+  }, [userData, selectedGroup]);
 
   return (
     <div className="p-check-works">

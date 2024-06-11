@@ -30,6 +30,7 @@ export const Notification = ({
 }) => {
   const { startLottie, endLottie } = useContext(AnimationContext)!;
   const [detailNum, setDetailNum] = useState<number | null>(null);
+
   useEffect(() => {
     notifications.sort((a, b) => (a.date > b.date ? 1 : -1));
   }, [notifications]);

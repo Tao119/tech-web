@@ -17,7 +17,6 @@ export default function GuestTemplate({
   const { setUserData } = useContext(UserContext)!;
   const { setGroup } = useContext(GroupContext)!;
   const { startLottie, endLottie } = useContext(AnimationContext)!;
-  useEffect(() => {}, []);
   useEffect(() => {
     if (!session) return;
 

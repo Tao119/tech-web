@@ -21,7 +21,7 @@ const Page = () => {
   useEffect(() => {
     if (!userData) return;
     fetchData();
-  }, [userData]);
+  }, [userData, selectedGroup]);
 
   const fetchData = async () => {
     startLottie(LoadingAnimation);
