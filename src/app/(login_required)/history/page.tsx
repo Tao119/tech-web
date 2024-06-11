@@ -123,8 +123,8 @@ const Page = () => {
         onClick={() => setShowUploadPopup(true)}
       />
       <div className="p-history__images">
-        {historySortedByDate.map((d) => (
-          <div className="p-history__image-container">
+        {historySortedByDate.map((d, i) => (
+          <div className="p-history__image-container" key={i}>
             {d.userId == userData?.id ? (
               <DeleteButton
                 className="p-history__image-delete"
