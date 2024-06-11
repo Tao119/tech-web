@@ -21,6 +21,7 @@ import { Button } from "@/components/button";
 import SampleImage from "@/assets/img/sample-image.jpeg";
 import { CloseButton } from "@/components/closeButton";
 import { DeleteButton } from "@/components/deleteButton";
+import { Pagination } from "@/components/pagination";
 
 const Page = () => {
   const [err, setErr] = useState("");
@@ -35,7 +36,10 @@ const Page = () => {
   const [groupData, setGroupData] = useState<GroupData>();
   const { selectedGroup, setGroup } = useContext(GroupContext)!;
 
-  const historySortedByDate = [...historyData].sort((a, b) =>
+  const [page, setPage] = useState(1);
+  const total = 5;
+
+  const sortedByDate = [...historyData].sort((a, b) =>
     a.date > b.date ? -1 : 1
   );
 
@@ -123,7 +127,7 @@ const Page = () => {
         onClick={() => setShowUploadPopup(true)}
       />
       <div className="p-history__images">
-        {historySortedByDate.map((d, i) => (
+        {sortedByDate.slice((page - 1) * total, page * total).map((d, i) => (
           <div className="p-history__image-container" key={i}>
             {d.userId == userData?.id ? (
               <DeleteButton
@@ -149,6 +153,12 @@ const Page = () => {
           </div>
         ))}
       </div>
+      <Pagination
+        page={page}
+        all={sortedByDate.length}
+        total={total}
+        updatePage={setPage}
+      />
       {showUploadPopup ? (
         <>
           <div className="p-history__upload">
