@@ -61,6 +61,27 @@ const Page = () => {
         ) : (
           <span className="p-info__link -disabled">FaceBookグループ</span>
         )}
+        <Link
+          href="https://lit.sh/presenv1"
+          target="_brank"
+          className="p-info__link"
+        >
+          プレゼンの教科書(初級)
+        </Link>
+        <Link
+          href="https://lit.sh/presenv2"
+          target="_brank"
+          className="p-info__link"
+        >
+          プレゼンの教科書(中級)
+        </Link>{" "}
+        <Link
+          href="https://lit.sh/presenv3"
+          target="_brank"
+          className="p-info__link"
+        >
+          プレゼンの教科書(上級)
+        </Link>
       </div>
     </div>
   );
