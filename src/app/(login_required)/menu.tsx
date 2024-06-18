@@ -65,7 +65,7 @@ const Menu = ({
           closeMenu();
         }}
       >
-        おすすめゲーム(工事中)
+        おすすめゲーム
       </span>
       <span
         className="l-menu__link"
@@ -83,7 +83,7 @@ const Menu = ({
           closeMenu();
         }}
       >
-        作品コーナー(工事中)
+        作品コーナー
       </span>
       <SignOutButton className="l-menu-signout" label="サインアウト" />
     </div>

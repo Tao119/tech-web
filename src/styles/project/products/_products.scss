@@ -1,0 +1,145 @@
+@use "../../foundation" as *;
+
+.p-products {
+    width: 500px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+
+    &__plus {
+        align-self: flex-end;
+    }
+
+
+    &__title {
+        text-align: left;
+        font-size: $fs-title;
+        margin: 20px 0;
+        padding: 0 20px;
+    }
+
+    &__images {
+        width: 100%;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        overflow-y: scroll;
+        padding: 20px;
+    }
+
+    &__image-title {
+        width: 100%;
+        font-size: $fs-medium;
+        font-weight: $fw-bold;
+        text-align: left;
+        margin-bottom: 5px;
+    }
+
+    &__image-delete {
+        align-self: flex-end;
+        margin: 5px;
+    }
+
+    &__image-comment {
+        width: 100%;
+        font-size: $fs-text;
+        text-align: left;
+        margin-bottom: 5px;
+    }
+
+    &__image {
+        width: 400px;
+        height: 300px;
+        margin-bottom: 5px;
+    }
+
+    &__image-user {
+        width: 100%;
+        font-size: $fs-text;
+        text-align: right;
+        margin-bottom: 5px;
+    }
+
+    &__container {
+        width: 420px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px;
+        border-radius: 10px;
+        border: 1px solid $gray;
+        margin: 10px;
+
+        &.-link {
+            &:hover {
+                border: 1px solid $light-blue;
+            }
+        }
+    }
+
+
+    &__upload {
+        @include contentBox(800px, 700px);
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+
+        left: 50%;
+        top: 50%;
+        translate: -50% -50%;
+
+        z-index: 3;
+    }
+
+    &__upload-title {
+        font-size: $fs-sub-title;
+        font-weight: $fw-bold;
+    }
+
+    &__upload-button {
+        width: 150px;
+        margin-bottom: 20px;
+    }
+
+    &__upload-input {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        flex-direction: row;
+        border-radius: 10px;
+        border: 1px solid $gray;
+        width: 250px;
+        height: 50px;
+        font-size: $fs-medium;
+    }
+
+    &__upload-image {
+        width: 350px;
+        height: 280px;
+        border-radius: 10px;
+        border: 1px solid $black;
+    }
+
+    &__upload-submit {
+        width: 150px;
+        height: 40px;
+        margin-bottom: 20px;
+
+        &.-disabled {
+            color: $blue;
+            background-color: $pale-blue;
+        }
+    }
+
+    &__upload-close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+}
