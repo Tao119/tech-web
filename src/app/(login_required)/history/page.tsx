@@ -135,7 +135,8 @@ const Page = () => {
             {d.userId == userData?.id ? (
               <DeleteButton
                 className="p-history__image-delete"
-                onClick={() => {
+                onClick={(e) => {
+                  e.preventDefault();
                   deleteImage(d.id);
                 }}
               />

@@ -131,7 +131,8 @@ const Page = () => {
       {d.userId == userData?.id ? (
         <DeleteButton
           className="p-games__image-delete"
-          onClick={() => {
+          onClick={(e) => {
+            e.preventDefault();
             deleteImage(d.id);
           }}
         />
