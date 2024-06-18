@@ -193,7 +193,7 @@ const Page = () => {
               className="p-products__upload-close"
               onClick={() => setShowUploadPopup(false)}
             />
-            <span className="p-products__upload-title">写真をアップロード</span>
+            <span className="p-products__upload-title">作品をアップロード</span>
             <input
               className="p-products__upload-input-image"
               type="file"

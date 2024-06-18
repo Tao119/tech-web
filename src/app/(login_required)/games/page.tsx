@@ -195,7 +195,7 @@ const Page = () => {
               className="p-games__upload-close"
               onClick={() => setShowUploadPopup(false)}
             />
-            <span className="p-games__upload-title">写真をアップロード</span>
+            <span className="p-games__upload-title">ゲームをアップロード</span>
             <input
               className="p-games__upload-input-image"
               type="file"
