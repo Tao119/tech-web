@@ -6,6 +6,7 @@ import {
   UserContext,
 } from "@/app/contextProvider";
 import LoadingAnimation from "@/assets/json/loading-animation.json";
+import SampleIcon from "@/assets/img/icon-sample.png";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { GroupData, readGroupById } from "@/models/groups";
@@ -128,15 +129,31 @@ const Page = () => {
 
   const content = (d: RecommendedGameData) => (
     <>
-      {d.userId == userData?.id ? (
-        <DeleteButton
-          className="p-games__image-delete"
-          onClick={(e) => {
-            e.preventDefault();
-            deleteImage(d.id);
-          }}
-        />
-      ) : null}
+      <div className="p-games__header">
+        {d.userIcon ? (
+          <Image
+            className="p-games__image-icon"
+            src={d.userIcon}
+            alt=""
+            height={30}
+            width={30}
+          />
+        ) : (
+          <Image className="p-games__image-icon" src={SampleIcon} alt="" />
+        )}
+        <span className="p-games__image-user">
+          {d.userName ? `${d.userName}` : ""}
+        </span>
+        {d.userId == userData?.id ? (
+          <DeleteButton
+            className="p-games__image-delete"
+            onClick={(e) => {
+              e.preventDefault();
+              deleteImage(d.id);
+            }}
+          />
+        ) : null}
+      </div>
       <span className="p-games__image-title">{d.title}</span>
       <span className="p-games__image-comment">{d.comment}</span>
       {d.image ? (

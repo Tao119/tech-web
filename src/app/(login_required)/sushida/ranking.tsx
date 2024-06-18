@@ -12,6 +12,7 @@ import { Switcher } from "@/components/switcher";
 import { courses } from "./save";
 import { Pagination } from "@/components/pagination";
 import { GroupData, readGroupById } from "@/models/groups";
+import SampleIcon from "@/assets/img/icon-sample.png";
 
 const Ranking = () => {
   const { selectedGroup, setGroup } = useContext(GroupContext)!;
@@ -92,6 +93,21 @@ const Ranking = () => {
                       <div className="p-sushida-ranking__top-score u-mr36">
                         {d.score}
                       </div>
+                      {d.userIcon ? (
+                        <Image
+                          className="p-sushida-ranking__top-icon"
+                          src={d.userIcon}
+                          alt=""
+                          height={30}
+                          width={30}
+                        />
+                      ) : (
+                        <Image
+                          className="p-sushida-ranking__top-icon"
+                          src={SampleIcon}
+                          alt=""
+                        />
+                      )}
                       <div className="p-sushida-ranking__top-name">
                         {d.userName}
                       </div>
@@ -128,6 +144,21 @@ const Ranking = () => {
                       <div className="p-sushida-ranking__top-score u-mr36">
                         {d.score}
                       </div>
+                      {d.userIcon ? (
+                        <Image
+                          className="p-sushida-ranking__top-icon"
+                          src={d.userIcon}
+                          alt=""
+                          height={30}
+                          width={30}
+                        />
+                      ) : (
+                        <Image
+                          className="p-sushida-ranking__top-icon"
+                          src={SampleIcon}
+                          alt=""
+                        />
+                      )}
                       <div className="p-sushida-ranking__top-name">
                         {d.userName}
                       </div>
@@ -149,6 +180,21 @@ const Ranking = () => {
                 <div className="p-sushida-ranking__timeline-score">
                   {d.score}
                 </div>
+                {d.userIcon ? (
+                  <Image
+                    className="p-sushida-ranking__timeline-icon"
+                    src={d.userIcon}
+                    alt=""
+                    height={30}
+                    width={30}
+                  />
+                ) : (
+                  <Image
+                    className="p-sushida-ranking__timeline-icon"
+                    src={SampleIcon}
+                    alt=""
+                  />
+                )}
                 <div className="p-sushida-ranking__timeline-name">
                   {d.userName}
                 </div>

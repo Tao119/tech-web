@@ -14,6 +14,7 @@ export interface HistoryData {
     date: Date;
     userId: string;
     userName?: string
+    userIcon?: string
 }
 
 interface HistoryFirestoreData extends HistoryData {
@@ -39,6 +40,7 @@ export const readHistoryData = async (groupId: string) => {
                 const res = await readUserById(d.userId);
                 if (res.success && res.data) {
                     d.userName = res.data.name;
+                    d.userIcon = res.data.image;
                 }
             }
         })

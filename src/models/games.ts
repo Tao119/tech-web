@@ -14,7 +14,8 @@ export interface RecommendedGameData {
     like: number;
     date: Date;
     userId: string;
-    userName?: string
+    userName?: string;
+    userIcon?: string;
 }
 
 interface RecommendedGameFireStoreData extends RecommendedGameData {
@@ -40,6 +41,7 @@ export const readRecommendedGameData = async (groupId: string) => {
                 const res = await readUserById(d.userId);
                 if (res.success && res.data) {
                     d.userName = res.data.name;
+                    d.userIcon = res.data.image;
                 }
             }
         })

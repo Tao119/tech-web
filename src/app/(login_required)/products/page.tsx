@@ -22,6 +22,7 @@ import {
   readProductData,
   uploadProduct,
 } from "@/models/products";
+import SampleIcon from "@/assets/img/icon-sample.png";
 import Link from "next/link";
 
 const Page = () => {
@@ -128,15 +129,31 @@ const Page = () => {
 
   const content = (d: ProductData) => (
     <>
-      {d.userId == userData?.id ? (
-        <DeleteButton
-          className="p-products__image-delete"
-          onClick={(e) => {
-            e.preventDefault();
-            deleteImage(d.id);
-          }}
-        />
-      ) : null}
+      <div className="p-products__header">
+        {d.userIcon ? (
+          <Image
+            className="p-products__image-icon"
+            src={d.userIcon}
+            alt=""
+            height={30}
+            width={30}
+          />
+        ) : (
+          <Image className="p-games__image-icon" src={SampleIcon} alt="" />
+        )}
+        <span className="p-products__image-user">
+          {d.userName ? `${d.userName}` : ""}
+        </span>
+        {d.userId == userData?.id ? (
+          <DeleteButton
+            className="p-products__image-delete"
+            onClick={(e) => {
+              e.preventDefault();
+              deleteImage(d.id);
+            }}
+          />
+        ) : null}
+      </div>
       <span className="p-products__image-title">{d.title}</span>
       <span className="p-products__image-comment">{d.comment}</span>
       {d.image ? (
@@ -149,9 +166,6 @@ const Page = () => {
           alt=""
         />
       ) : null}
-      <span className="p-products__image-user">
-        {d.userName ? `by ${d.userName}` : ""}
-      </span>
     </>
   );
 

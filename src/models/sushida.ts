@@ -20,6 +20,7 @@ interface SushidaFirestoreData extends SushidaData {
 
 export interface RankingData extends SushidaData {
     userName: string;
+    userIcon?: string;
     image: string;
 }
 
@@ -79,6 +80,7 @@ export const readSushidaDataByGroupId = async (groupId: string): Promise<{ succe
                     sushidaData.push({
                         userId: userId,
                         userName: user.name,
+                        userIcon: user.image,
                         course: sushidaDataPoint.course,
                         score: sushidaDataPoint.score,
                         typeSpeed: sushidaDataPoint.typeSpeed,

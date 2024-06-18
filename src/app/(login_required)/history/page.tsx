@@ -7,6 +7,7 @@ import {
 } from "@/app/contextProvider";
 import LoadingAnimation from "@/assets/json/loading-animation.json";
 import { useRouter } from "next/navigation";
+import SampleIcon from "@/assets/img/icon-sample.png";
 import {
   HistoryData,
   deleteHistory,
@@ -132,15 +133,35 @@ const Page = () => {
       <div className="p-history__images">
         {sortedByDate.slice((page - 1) * total, page * total).map((d, i) => (
           <div className="p-history__image-container" key={i}>
-            {d.userId == userData?.id ? (
-              <DeleteButton
-                className="p-history__image-delete"
-                onClick={(e) => {
-                  e.preventDefault();
-                  deleteImage(d.id);
-                }}
-              />
-            ) : null}
+            <div className="p-history__header">
+              {d.userIcon ? (
+                <Image
+                  className="p-history__image-icon"
+                  src={d.userIcon}
+                  alt=""
+                  height={30}
+                  width={30}
+                />
+              ) : (
+                <Image
+                  className="p-games__image-icon"
+                  src={SampleIcon}
+                  alt=""
+                />
+              )}
+              <span className="p-history__image-user">
+                {d.userName ? `${d.userName}` : ""}
+              </span>
+              {d.userId == userData?.id ? (
+                <DeleteButton
+                  className="p-history__image-delete"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    deleteImage(d.id);
+                  }}
+                />
+              ) : null}
+            </div>
             <span className="p-history__image-title">{d.title}</span>
             <span className="p-history__image-comment">{d.comment}</span>
             <Image
@@ -151,9 +172,6 @@ const Page = () => {
               objectFit="cover"
               alt=""
             />
-            <span className="p-history__image-user">
-              {d.userName ? `by ${d.userName}` : ""}
-            </span>
           </div>
         ))}
       </div>
