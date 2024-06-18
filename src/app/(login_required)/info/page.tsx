@@ -62,21 +62,21 @@ const Page = () => {
           <span className="p-info__link -disabled">FaceBookグループ</span>
         )}
         <Link
-          href="https://lit.sh/presenv1"
+          href="https://lit.sh/Presenv1"
           target="_brank"
           className="p-info__link"
         >
           プレゼンの教科書(初級)
         </Link>
         <Link
-          href="https://lit.sh/presenv2"
+          href="https://lit.sh/Presenv2"
           target="_brank"
           className="p-info__link"
         >
           プレゼンの教科書(中級)
         </Link>{" "}
         <Link
-          href="https://lit.sh/presenv3"
+          href="https://lit.sh/Presenv3"
           target="_brank"
           className="p-info__link"
         >
