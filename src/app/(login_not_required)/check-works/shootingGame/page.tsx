@@ -67,6 +67,7 @@ const Page = () => {
       </span>
 
       <Accordion
+        bold
         checkbox
         title="STEP1 プロジェクトの起動"
         open={true}
@@ -102,6 +103,7 @@ const Page = () => {
         <Image className="p-check-work__image" alt="" src={Image0} />
       </Accordion>
       <Accordion
+        bold
         checkbox
         title="STEP2 MainシーンのUIを作る"
         setSelection={() => setSelection(1)}
@@ -117,6 +119,7 @@ const Page = () => {
         </span>
       </Accordion>
       <Accordion
+        bold
         checkbox
         title="STEP3 アイテムの設定"
         setSelection={() => setSelection(2)}
@@ -142,6 +145,7 @@ const Page = () => {
         </span>
       </Accordion>
       <Accordion
+        bold
         checkbox
         title="STEP4 敵の設定"
         setSelection={() => setSelection(3)}
@@ -164,6 +168,7 @@ const Page = () => {
         </span>
       </Accordion>
       <Accordion
+        bold
         checkbox
         title="STEP5 Ray Casterの設定"
         setSelection={() => setSelection(4)}
@@ -203,6 +208,7 @@ const Page = () => {
         </span>
       </Accordion>
       <Accordion
+        bold
         checkbox
         title="STEP6 敵やアイテムを自動生成しよう"
         setSelection={() => setSelection(5)}
@@ -245,6 +251,7 @@ const Page = () => {
         </span>
       </Accordion>
       <Accordion
+        bold
         checkbox
         title="STEP7 リザルト画面"
         setSelection={() => setSelection(6)}
@@ -262,6 +269,7 @@ const Page = () => {
         </span>
       </Accordion>
       <Accordion
+        bold
         checkbox
         title="STEP8 完成!!"
         setSelection={() => setSelection(7)}

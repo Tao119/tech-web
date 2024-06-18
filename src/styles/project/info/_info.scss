@@ -20,11 +20,10 @@
         flex-direction: column;
         justify-content: center;
         align-items: flex-start;
-
     }
 
     &__link {
-        font-size: $fs-sub-title;
+        font-size: $fs-medium;
         margin-bottom: 10px;
         color: $blue;
         text-decoration: underline;
@@ -34,4 +33,8 @@
         }
     }
 
+    &__acc {
+        align-self: flex-start;
+        text-align: left;
+    }
 }

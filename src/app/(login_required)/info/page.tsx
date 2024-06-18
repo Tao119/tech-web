@@ -9,6 +9,7 @@ import LoadingAnimation from "@/assets/json/loading-animation.json";
 import { GroupData, readGroupById, readGroupsByUserId } from "@/models/groups";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import Accordion from "@/components/accordion";
 
 const Page = () => {
   const [err, setErr] = useState("");
@@ -61,27 +62,29 @@ const Page = () => {
         ) : (
           <span className="p-info__link -disabled">FaceBookグループ</span>
         )}
-        <Link
-          href="https://lit.sh/Presenv1"
-          target="_brank"
-          className="p-info__link"
-        >
-          プレゼンの教科書(初級)
-        </Link>
-        <Link
-          href="https://lit.sh/Presenv2"
-          target="_brank"
-          className="p-info__link"
-        >
-          プレゼンの教科書(中級)
-        </Link>{" "}
-        <Link
-          href="https://lit.sh/Presenv3"
-          target="_brank"
-          className="p-info__link"
-        >
-          プレゼンの教科書(上級)
-        </Link>
+        <Accordion title="プレゼンの教科書" className="p-info__acc">
+          <Link
+            href="https://lit.sh/Presenv1"
+            target="_brank"
+            className="p-info__link"
+          >
+            プレゼンの教科書(初級)
+          </Link>
+          <Link
+            href="https://lit.sh/Presenv2"
+            target="_brank"
+            className="p-info__link"
+          >
+            プレゼンの教科書(中級)
+          </Link>{" "}
+          <Link
+            href="https://lit.sh/Presenv3"
+            target="_brank"
+            className="p-info__link"
+          >
+            プレゼンの教科書(上級)
+          </Link>
+        </Accordion>
       </div>
     </div>
   );

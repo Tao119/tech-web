@@ -4,9 +4,11 @@ type Props = {
   title: string;
   open?: boolean;
   children: ReactNode;
-  isSelected: boolean;
-  setSelection: Function;
+  isSelected?: boolean;
+  setSelection?: Function;
   checkbox?: boolean;
+  className?: string;
+  bold?: boolean;
 };
 
 export const Accordion = (props: Props) => {
@@ -25,17 +27,20 @@ export const Accordion = (props: Props) => {
   };
   return (
     <>
-      <div className="c-accordion">
+      <div className={`c-accordion ${props.className || ""}`}>
         <div className="c-accordion__header">
           {props.checkbox ? (
             <input
               type="checkbox"
               className="c-accordion__check"
-              onChange={() => props.setSelection()}
+              onChange={() => props.setSelection!()}
               checked={props.isSelected}
             />
           ) : null}
-          <span onClick={accordionClick} className="c-accordion__title">
+          <span
+            onClick={accordionClick}
+            className={`c-accordion__title ${props.bold ? "-bold" : ""}`}
+          >
             {props.title}
           </span>
         </div>
