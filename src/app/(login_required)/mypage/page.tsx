@@ -33,6 +33,8 @@ import {
 } from "@/models/notification";
 import { createReqestsString } from "@/constant/strings";
 import { Timestamp } from "firebase/firestore";
+import { Button } from "@/components/button";
+import { updateProfileImage } from "@/models/users";
 
 enum GroupOptions {
   null,
@@ -40,16 +42,19 @@ enum GroupOptions {
   create,
 }
 const MyPage = () => {
-  const { userData } = useContext(UserContext)!;
+  const { userData, setUserData } = useContext(UserContext)!;
   const [groups, setGroups] = useState<GroupData[]>([]);
   const [requests, setRequests] = useState<GroupRequestData[]>([]);
   const [groupIdOrName, setGroupIdOrName] = useState("");
   const [showPopup, setShowPopup] = useState(GroupOptions.null);
   const [showNotification, setShowNotification] = useState(false);
   const [showJoinOptions, setShowJoinOptions] = useState(false);
+  const [showProfileImagePopup, setShowProfileImagePopup] = useState(false);
   const { startLottie, endLottie } = useContext(AnimationContext)!;
   const { selectedGroup, setGroup } = useContext(GroupContext)!;
   const [notifications, setNotifications] = useState<NotificationData[]>([]);
+  const [imageStr, setImageStr] = useState("");
+  const [uploadedImage, uploadImage] = useState<File>();
   const unread = notifications.some((d) => !d.read);
   const router = useRouter();
 
@@ -133,7 +138,7 @@ const MyPage = () => {
     startLottie(LoadingAnimation);
     if (!userData) return;
     const res = await createGroup(groupIdOrName, userData.id);
-    if (!res || !res.data) {
+    if (!res.success || !res.data) {
       console.error(res.error);
       endLottie();
       return;
@@ -141,6 +146,36 @@ const MyPage = () => {
     setGroups((prev) => [...prev, res.data!]);
     setShowPopup(GroupOptions.null);
     setGroupIdOrName("");
+    endLottie();
+  };
+  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    if (!e.target.files || e.target.files?.length == 0) return;
+    const file = e.target.files[0];
+    const imageUrl = URL.createObjectURL(file);
+    setImageStr(imageUrl);
+
+    const selectedImage = e.target.files[0];
+    uploadImage(selectedImage);
+  };
+
+  const setProfileImage = async () => {
+    if (!userData) return;
+    if (!uploadedImage && !confirm("アップロードした画像を削除しますか？"))
+      return;
+    startLottie(LoadingAnimation);
+    const res = await updateProfileImage(userData?.id, uploadedImage);
+    if (!res.success) {
+      console.error(res.error);
+      alert("失敗しました");
+      endLottie();
+      return;
+    }
+    setShowProfileImagePopup(false);
+    uploadImage(null!);
+    setImageStr("");
+    setUserData({ ...userData, image: res.imageUrl });
+    alert("更新しました");
     endLottie();
   };
 
@@ -164,7 +199,57 @@ const MyPage = () => {
         <div className="p-user-info">
           <span className="p-user-info__title">ユーザー情報</span>
           <div className="p-user-info__contents">
-            <Image className="p-user-info__icon" src={SampleIcon} alt="" />
+            <Image
+              className="p-user-info__icon"
+              src={userData?.image ? userData.image : SampleIcon}
+              width={200}
+              height={200}
+              alt=""
+              onClick={() => setShowProfileImagePopup(true)}
+            />
+            {showProfileImagePopup ? (
+              <div className="p-user-info__upload">
+                <CloseButton
+                  className="p-user-info__upload-close"
+                  onClick={() => setShowProfileImagePopup(false)}
+                />
+                <span className="p-user-info__upload-title">
+                  プロフィール画像をアップロード
+                </span>
+                <input
+                  className="p-user-info__upload-input-image"
+                  type="file"
+                  onChange={handleInput}
+                  accept="image/*"
+                />
+                {uploadedImage ? (
+                  <Image
+                    className="p-user-info__upload-image"
+                    id="target"
+                    src={imageStr}
+                    alt="user image"
+                    width={200}
+                    height={200}
+                  />
+                ) : (
+                  <Image
+                    className="p-user-info__upload-image"
+                    id="target"
+                    src={SampleIcon}
+                    alt="sample"
+                    width={200}
+                    height={200}
+                  />
+                )}
+                <Button
+                  className={`p-user-info__upload-submit`}
+                  label="送信する"
+                  onClick={() => {
+                    setProfileImage();
+                  }}
+                />
+              </div>
+            ) : null}
             <div className="p-user-info__info">
               <span className="p-user-info__label">email</span>
               <span className="p-user-info__email">{userData?.email}</span>
@@ -276,6 +361,14 @@ const MyPage = () => {
           className="p-notification__overlay"
           onClick={() => {
             setShowNotification(false);
+          }}
+        />
+      ) : null}
+      {showProfileImagePopup ? (
+        <OverLay
+          className="p-user-info__overlay"
+          onClick={() => {
+            setShowProfileImagePopup(false);
           }}
         />
       ) : null}
