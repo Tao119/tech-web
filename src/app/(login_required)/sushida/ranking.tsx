@@ -34,6 +34,20 @@ const Ranking = () => {
     (d) => d.date >= oneWeekAgo
   );
   const sortedDataByDate = [...data].sort((a, b) => (a.date < b.date ? 1 : -1));
+  const maxScoresByName = data.reduce<Record<string, RankingData>>(
+    (acc, item) => {
+      if (!acc[item.userName] || acc[item.userName].score < item.score) {
+        acc[item.userName] = item;
+      }
+      return acc;
+    },
+    {}
+  );
+
+  const sortedDataByScoreUser: RankingData[] = Object.values(
+    maxScoresByName
+  ).sort((a, b) => b.score - a.score);
+
   const [page, setPage] = useState(1);
   const total = 10;
 
@@ -73,7 +87,7 @@ const Ranking = () => {
               .length == 0 ? (
               <span>データが存在しません</span>
             ) : (
-              sortedDataByScore
+              sortedDataByScoreUser
                 .filter((d) => d.course == selectedCourse)
                 .slice(0, 3)
                 .map((d, index) => (
