@@ -21,20 +21,13 @@ const Ranking = () => {
   const [data, setData] = useState<RankingData[]>([]);
   const { startLottie, endLottie } = useContext(AnimationContext)!;
 
-  const sortedDataByScore = [...data].sort((a, b) =>
-    a.score < b.score ? 1 : -1
-  );
-
   const today = new Date();
   const oneWeekAgo = new Date();
   oneWeekAgo.setDate(today.getDate() - 6);
   oneWeekAgo.setHours(0, 0, 0, 0);
 
-  const sortedDataByScoreInThisWeek = [...sortedDataByScore].filter(
-    (d) => d.date >= oneWeekAgo
-  );
   const sortedDataByDate = [...data].sort((a, b) => (a.date < b.date ? 1 : -1));
-  const maxScoresByName = data.reduce<Record<string, RankingData>>(
+  const maxScoresByName = [...data].reduce<Record<string, RankingData>>(
     (acc, item) => {
       if (!acc[item.userName] || acc[item.userName].score < item.score) {
         acc[item.userName] = item;
@@ -43,9 +36,21 @@ const Ranking = () => {
     },
     {}
   );
+  const maxScoresByNameThisWeek = [...data]
+    .filter((d) => d.date >= oneWeekAgo)
+    .reduce<Record<string, RankingData>>((acc, item) => {
+      if (!acc[item.userName] || acc[item.userName].score < item.score) {
+        acc[item.userName] = item;
+      }
+      return acc;
+    }, {});
 
-  const sortedDataByScoreUser: RankingData[] = Object.values(
-    maxScoresByName
+  const sortedDataByScore: RankingData[] = Object.values(maxScoresByName).sort(
+    (a, b) => b.score - a.score
+  );
+
+  const sortedDataByScoreInThisWeek = Object.values(
+    maxScoresByNameThisWeek
   ).sort((a, b) => b.score - a.score);
 
   const [page, setPage] = useState(1);
@@ -87,7 +92,7 @@ const Ranking = () => {
               .length == 0 ? (
               <span>データが存在しません</span>
             ) : (
-              sortedDataByScoreUser
+              sortedDataByScore
                 .filter((d) => d.course == selectedCourse)
                 .slice(0, 3)
                 .map((d, index) => (
