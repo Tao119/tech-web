@@ -84,6 +84,13 @@ const Page = () => {
           >
             プレゼンの教科書(上級)
           </Link>
+          <Link
+            href="https://docs.google.com/presentation/d/18E6FzJ7WIky-Lw1UWNmwLgtkFMZkd4JMh0prB1LCUmg/edit?usp=sharing"
+            target="_brank"
+            className="p-info__link"
+          >
+            企画書テンプレ
+          </Link>
         </Accordion>
       </div>
     </div>
