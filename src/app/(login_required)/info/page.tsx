@@ -62,6 +62,13 @@ const Page = () => {
         ) : (
           <span className="p-info__link -disabled">FaceBookグループ</span>
         )}
+        {userData?.tms ? (
+          <Link href={userData.tms} target="_brank" className="p-info__link">
+            TMS
+          </Link>
+        ) : (
+          <span className="p-info__link -disabled">FaceBookグループ</span>
+        )}
         <Accordion title="プレゼンの教科書" className="p-info__acc">
           <Link
             href="https://lit.sh/Presenv1"
