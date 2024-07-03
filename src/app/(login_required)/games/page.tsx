@@ -21,8 +21,11 @@ import {
   RecommendedGameData,
   deleteRecommendedGame,
   readRecommendedGameData,
+  toggleLikePost,
   uploadRecommendedGame,
 } from "@/models/games";
+import EmptyHeart from "@/assets/img/heart-empty.svg";
+import FilledHeart from "@/assets/img/heart-fill.svg";
 import Link from "next/link";
 
 const Page = () => {
@@ -126,6 +129,22 @@ const Page = () => {
     }
     endLottie();
   };
+  const likePost = async (d: RecommendedGameData) => {
+    if (!d.id || !userData) return;
+
+    const res = await toggleLikePost(d.id, userData.id);
+
+    if (res.success) {
+      const newData = [...gamesData];
+      if (d.like.indexOf(userData.id) == -1) {
+        newData[newData.indexOf(d)].like.push(userData.id);
+      } else {
+        newData[newData.indexOf(d)].like.splice(d.like.indexOf(userData.id));
+      }
+
+      setGamesData(newData);
+    }
+  };
 
   const content = (d: RecommendedGameData) => (
     <>
@@ -166,9 +185,22 @@ const Page = () => {
           alt=""
         />
       ) : null}
-      <span className="p-games__image-user">
-        {d.userName ? `by ${d.userName}` : ""}
-      </span>
+      <div className="p-history__image-like-container">
+        <Image
+          className="p-history__image-like"
+          alt=""
+          src={
+            d.like && d.like.includes(userData?.id!) ? FilledHeart : EmptyHeart
+          }
+          onClick={(e) => {
+            e.preventDefault();
+            likePost(d);
+          }}
+        />
+        <span className="p-history__image-like-number">
+          {d.like ? d.like.length : 0}
+        </span>
+      </div>
     </>
   );
 

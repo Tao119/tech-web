@@ -1,7 +1,7 @@
 import { db } from "@/firebase/client";
-import { doc, query, collection, where, Timestamp, deleteDoc } from "firebase/firestore";
+import { doc, query, collection, where, Timestamp, deleteDoc, arrayUnion, arrayRemove } from "firebase/firestore";
 import { UserData, readUserById } from "./users";
-import { getDocWithCamel, getDocsWithCamel, setDocWithSnake, uploadImage } from "@/services/firestore";
+import { getDocWithCamel, getDocsWithCamel, setDocWithSnake, updateDocWithSnake, uploadImage } from "@/services/firestore";
 import { GroupData } from "./groups";
 import { convertToCamelCase } from "@/services/convert";
 
@@ -11,7 +11,7 @@ export interface ProductData {
     comment: string;
     link: string;
     image: string;
-    like: number;
+    like: string[];
     date: Date;
     userId: string;
     userName?: string;
@@ -64,7 +64,7 @@ export const uploadProduct = async (groupId: string, userId: string, title: stri
         }
         const date = new Date();
         const time = Timestamp.fromDate(date)
-        const data = { image: imageUrl, like: 0, groupId, title, comment, date, time, userId, link } as ProductFireStoreData
+        const data = { image: imageUrl, like: [], groupId, title, comment, date, time, userId, link } as ProductFireStoreData
         await setDocWithSnake(doc(productRef), data);
         data.id = productRef.id;
         return { success: true, data: data as ProductData };
@@ -81,5 +81,30 @@ export const deleteProduct = async (id: string) => {
         return { success: true };
     } catch (error) {
         return { success: false, error: "Failed to delete products" };
+    }
+}
+export const toggleLikePost = async (id: string, userId: string) => {
+    try {
+        const historyRef = doc(db, "products", id);
+        const docSnap = await getDocWithCamel(historyRef);
+
+        if (!docSnap.exists()) {
+            throw new Error("Document does not exist!");
+        }
+
+        const data = docSnap.data() as ProductFireStoreData;
+        let updatedData;
+        if (data.like && data.like.includes(userId)) {
+            updatedData = { like: arrayRemove(userId) };
+        } else {
+            updatedData = { like: arrayUnion(userId) };
+        }
+
+        await updateDocWithSnake(historyRef, updatedData);
+
+        return { success: true };
+    } catch (error) {
+        console.error("Error toggling like on post:", error);
+        return { success: false, error: "Failed to toggle like on post" };
     }
 }

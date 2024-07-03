@@ -12,6 +12,7 @@ import {
   HistoryData,
   deleteHistory,
   readHistoryData,
+  toggleLikePost,
   uploadHistory,
 } from "@/models/history";
 import Image from "next/image";
@@ -23,6 +24,8 @@ import SampleImage from "@/assets/img/sample-image.jpeg";
 import { CloseButton } from "@/components/closeButton";
 import { DeleteButton } from "@/components/deleteButton";
 import { Pagination } from "@/components/pagination";
+import EmptyHeart from "@/assets/img/heart-empty.svg";
+import FilledHeart from "@/assets/img/heart-fill.svg";
 
 const Page = () => {
   const [err, setErr] = useState("");
@@ -122,6 +125,22 @@ const Page = () => {
     }
     endLottie();
   };
+  const likePost = async (d: HistoryData) => {
+    if (!d.id || !userData) return;
+
+    const res = await toggleLikePost(d.id, userData.id);
+
+    if (res.success) {
+      const newData = [...historyData];
+      if (d.like.indexOf(userData.id) == -1) {
+        newData[newData.indexOf(d)].like.push(userData.id);
+      } else {
+        newData[newData.indexOf(d)].like.splice(d.like.indexOf(userData.id));
+      }
+
+      setHistoryData(newData);
+    }
+  };
 
   return (
     <div className="p-history">
@@ -172,6 +191,24 @@ const Page = () => {
               objectFit="cover"
               alt=""
             />
+            <div className="p-history__image-like-container">
+              <Image
+                className="p-history__image-like"
+                alt=""
+                src={
+                  d.like && d.like.includes(userData?.id!)
+                    ? FilledHeart
+                    : EmptyHeart
+                }
+                onClick={(e) => {
+                  e.preventDefault();
+                  likePost(d);
+                }}
+              />
+              <span className="p-history__image-like-number">
+                {d.like ? d.like.length : 0}
+              </span>
+            </div>
           </div>
         ))}
       </div>

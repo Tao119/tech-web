@@ -20,10 +20,13 @@ import {
   ProductData,
   deleteProduct,
   readProductData,
+  toggleLikePost,
   uploadProduct,
 } from "@/models/products";
 import SampleIcon from "@/assets/img/icon-sample.png";
 import Link from "next/link";
+import EmptyHeart from "@/assets/img/heart-empty.svg";
+import FilledHeart from "@/assets/img/heart-fill.svg";
 
 const Page = () => {
   const [err, setErr] = useState("");
@@ -127,6 +130,22 @@ const Page = () => {
     endLottie();
   };
 
+  const likePost = async (d: ProductData) => {
+    if (!d.id || !userData) return;
+
+    const res = await toggleLikePost(d.id, userData.id);
+
+    if (res.success) {
+      const newData = [...productsData];
+      if (d.like.indexOf(userData.id) == -1) {
+        newData[newData.indexOf(d)].like.push(userData.id);
+      } else {
+        newData[newData.indexOf(d)].like.splice(d.like.indexOf(userData.id));
+      }
+
+      setProductsData(newData);
+    }
+  };
   const content = (d: ProductData) => (
     <>
       <div className="p-products__header">
@@ -165,7 +184,23 @@ const Page = () => {
           objectFit="cover"
           alt=""
         />
-      ) : null}
+      ) : null}{" "}
+      <div className="p-history__image-like-container">
+        <Image
+          className="p-history__image-like"
+          alt=""
+          src={
+            d.like && d.like.includes(userData?.id!) ? FilledHeart : EmptyHeart
+          }
+          onClick={(e) => {
+            e.preventDefault();
+            likePost(d);
+          }}
+        />
+        <span className="p-history__image-like-number">
+          {d.like ? d.like.length : 0}
+        </span>
+      </div>
     </>
   );
 

@@ -92,6 +92,25 @@
         z-index: 1;
     }
 
+    &__image-like {
+        height: 20px;
+        width: 30px;
+    }
+
+    &__image-like-number {
+        font-size: $fs-medium;
+        width: 30px;
+    }
+
+    &__image-like-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+        width: 100%;
+        padding: 5px 10px;
+    }
+
 
     &__upload {
         @include contentBox(800px, 700px);
