@@ -69,7 +69,7 @@ const Page = () => {
         ) : (
           <span className="p-info__link -disabled">FaceBookグループ</span>
         )}
-        {userData?.tms ? (
+        {userData?.kikakusho ? (
           <Link
             href={userData.kikakusho}
             target="_brank"
