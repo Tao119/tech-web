@@ -12,6 +12,7 @@ export interface UserData {
     isAdmin: boolean;
     image?: string;
     tms?: string;
+    kikakusho?: string;
 };
 
 export const readUserById = async (id: string): Promise<{ success: boolean, data?: UserData, error?: string }> => {
