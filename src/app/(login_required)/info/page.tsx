@@ -50,25 +50,17 @@ const Page = () => {
           >
             Messengerグループ(チーム)
           </Link>
-        ) : (
-          <span className="p-info__link -disabled">
-            Messengerグループ(チーム)
-          </span>
-        )}
+        ) : null}
         {groupData?.facebook ? (
           <Link href="" target="_brank" className="p-info__link">
             FaceBookグループ
           </Link>
-        ) : (
-          <span className="p-info__link -disabled">FaceBookグループ</span>
-        )}
+        ) : null}
         {userData?.tms ? (
           <Link href={userData.tms} target="_brank" className="p-info__link">
             TMS
           </Link>
-        ) : (
-          <span className="p-info__link -disabled">FaceBookグループ</span>
-        )}
+        ) : null}
         {userData?.kikakusho ? (
           <Link
             href={userData.kikakusho}
@@ -77,9 +69,12 @@ const Page = () => {
           >
             企画書
           </Link>
-        ) : (
-          <span className="p-info__link -disabled">FaceBookグループ</span>
-        )}
+        ) : null}
+        {userData?.mypage ? (
+          <Link href={userData.mypage} target="_brank" className="p-info__link">
+            TMS
+          </Link>
+        ) : null}
         <Accordion title="プレゼンの教科書" className="p-info__acc">
           <Link
             href="https://lit.sh/Presenv1"
@@ -103,13 +98,6 @@ const Page = () => {
             プレゼンの教科書(上級)
           </Link>
         </Accordion>
-        <Link
-          href="https://docs.google.com/presentation/d/18E6FzJ7WIky-Lw1UWNmwLgtkFMZkd4JMh0prB1LCUmg/edit?usp=sharing"
-          target="_brank"
-          className="p-info__link"
-        >
-          企画書テンプレ
-        </Link>
       </div>
     </div>
   );

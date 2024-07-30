@@ -13,6 +13,7 @@ export interface UserData {
     image?: string;
     tms?: string;
     kikakusho?: string;
+    mypage?: string;
 };
 
 export const readUserById = async (id: string): Promise<{ success: boolean, data?: UserData, error?: string }> => {
