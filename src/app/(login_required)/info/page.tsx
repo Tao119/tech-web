@@ -75,6 +75,13 @@ const Page = () => {
             TMS
           </Link>
         ) : null}
+        <Link
+          href="https://learning.life-is-tech.com/slides/1712820266612x757838633518497800"
+          target="_brank"
+          className="p-info__link"
+        >
+          みんなの作品ページ(2024年春)
+        </Link>
         <Accordion title="プレゼンの教科書" className="p-info__acc">
           <Link
             href="https://lit.sh/Presenv1"
