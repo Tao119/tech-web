@@ -10,10 +10,13 @@ import { GroupData, readGroupById, readGroupsByUserId } from "@/models/groups";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Accordion from "@/components/accordion";
+import { Links, LinksData, readLinks } from "@/models/links";
+import { CommonLinksData, readCommonLinks } from "@/models/commonLinks";
 
 const Page = () => {
   const [err, setErr] = useState("");
   const [groupData, setGroupData] = useState<GroupData>();
+  const [linksData, setLinksData] = useState<Links[]>([]);
   const { startLottie, endLottie } = useContext(AnimationContext)!;
   const { userData } = useContext(UserContext)!;
   const { selectedGroup, setGroup } = useContext(GroupContext)!;
@@ -31,6 +34,19 @@ const Page = () => {
       console.error(res.error);
       return;
     }
+
+    const linksRes = await readLinks(userData?.id!, res.data.id);
+    const commonLinksRes = await readCommonLinks(res.data.id);
+
+    if (
+      linksRes.success &&
+      commonLinksRes.success &&
+      linksRes.data &&
+      commonLinksRes.data
+    ) {
+      const l = linksRes.data.concat(commonLinksRes.data);
+      setLinksData(l);
+    }
     setGroupData(res.data);
     endLottie();
   };
@@ -39,50 +55,17 @@ const Page = () => {
     <div className="p-info">
       <span className="p-info__title">情報</span>
       <div className="p-info__links">
-        {/* <Link href="" target="_brank" className="p-info__link">
-          TMS
-        </Link> */}
-        {groupData?.messenger ? (
+        {linksData?.map((l) => (
           <Link
-            href={groupData?.messenger}
+            href={l.link}
             target="_brank"
             className="p-info__link"
+            key={l.label}
           >
-            Messengerグループ(チーム)
+            {l.label}
           </Link>
-        ) : null}
-        {groupData?.facebook ? (
-          <Link href="" target="_brank" className="p-info__link">
-            FaceBookグループ
-          </Link>
-        ) : null}
-        {userData?.tms ? (
-          <Link href={userData.tms} target="_brank" className="p-info__link">
-            TMS
-          </Link>
-        ) : null}
-        {userData?.kikakusho ? (
-          <Link
-            href={userData.kikakusho}
-            target="_brank"
-            className="p-info__link"
-          >
-            企画書
-          </Link>
-        ) : null}
-        {userData?.mypage ? (
-          <Link href={userData.mypage} target="_brank" className="p-info__link">
-            TMS
-          </Link>
-        ) : null}
-        <Link
-          href="https://learning.life-is-tech.com/slides/1712820266612x757838633518497800"
-          target="_brank"
-          className="p-info__link"
-        >
-          みんなの作品ページ(2024年春)
-        </Link>
-        <Accordion title="プレゼンの教科書" className="p-info__acc">
+        ))}
+        {/* <Accordion title="プレゼンの教科書" className="p-info__acc">
           <Link
             href="https://lit.sh/Presenv1"
             target="_brank"
@@ -104,7 +87,7 @@ const Page = () => {
           >
             プレゼンの教科書(上級)
           </Link>
-        </Accordion>
+        </Accordion> */}
       </div>
     </div>
   );
